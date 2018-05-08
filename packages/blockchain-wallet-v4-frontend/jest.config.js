@@ -4,13 +4,20 @@ module.exports = {
     '!src/**/rootSaga.js'
   ],
   coverageDirectory: './../../coverage/blockchain-wallet-v4-frontend',
-  coverageReporters: ['json', 'html'],
+  coverageReporters: [
+    'json',
+    'html'
+  ],
   setupFiles: [
     './../../config/jest/jest.shim.js',
     './../../config/jest/jest.adaptor.js'
   ],
   snapshotSerializers: [
     './../../node_modules/enzyme-to-json/serializer'
+  ],
+  testPathIgnorePatterns: [
+    './../..//node_modules/',
+    './e2e'
   ],
   transform: {
     '^.+\\.jsx$': './../../node_modules/babel-jest',
