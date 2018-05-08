@@ -15,7 +15,9 @@
     "node": true
   },
   "globals": {
-    "APP_VERSION": true
+    "APP_VERSION": true,
+    "browser": true,
+    "page": true
   },
   "rules": {
     "camelcase": 0,

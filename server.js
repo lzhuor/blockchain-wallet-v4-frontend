@@ -15,7 +15,7 @@ let apiDomain
 let walletHelperDomain
 
 // store configs and build server configuration
-if (process.env.LOCAL_PROD) {
+if (process.env.LOCAL_PROD || process.env.E2E) {
   // local production config
   const prodConfig = require('./config/env/production.js')
   localWalletOptions = require('./config/wallet-options-v4.json')
@@ -124,6 +124,7 @@ app.get('/*', function (req, res) {
     }
   })
 })
+
 
 console.log(`Express server listening on port ${port}...`)
 
