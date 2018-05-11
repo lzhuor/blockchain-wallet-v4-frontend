@@ -44,8 +44,9 @@
         "countries": ["GB", "AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "GF", "DE", "GI", "GR", "GP", "GG", "HU", "IS", "IE", "IM", "IT", "JE", "LV", "LI", "LT", "LU", "MT", "MQ", "YT", "MC", "NL", "NO", "PL", "PT", "RE", "BL", "MF", "PM", "SM", "SK", "SI", "ES", "SE", "CH"],
         "states": "*",
         "config": {
+          "production": false,
           "availability": true,
-          "partnerId": 19,
+          "partnerId": 24,
           "iSignThisDomain": "https://stage-verify.isignthis.com",
           "surveyLinks": [
             "https://blockchain.co1.qualtrics.com/SE/?SID=SV_8pupOEQPGkXx8Kp",
@@ -144,9 +145,7 @@
   "domains": {
     "root": "https://blockchain.info",
     "api": "https://api.blockchain.info",
-    "btcSocket": "wss://ws.blockchain.info/inv",
-    "ethSocket": "wss://ws.blockchain.info/eth/inv",
-    "bchSocket": "wss://ws.blockchain.info/bch/inv",
+    "webSocket": "wss://ws.blockchain.info/inv",
     "walletHelper": "https://wallet-helper.blockchain.info"
   }
 }
