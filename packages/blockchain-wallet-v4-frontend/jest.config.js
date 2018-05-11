@@ -1,4 +1,5 @@
 module.exports = {
+  "automock": false,
   collectCoverageFrom: [
     'src/**/*.js',
     '!src/**/rootSaga.js'

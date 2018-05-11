@@ -96,7 +96,7 @@ const Login = (props) => {
             <Field name='guid' validate={[required]} component={TextBox} borderColor={guidError ? 'invalid' : undefined} />
           </FormItem>
           { guidError && <GuidError inline>
-            <Text size='12px' color='error' weight={300}>
+            <Text size='12px' color='error' weight={300} id='ft-error'>
               <FormattedMessage id='scenes.login.guiderror' defaultMessage='Unknown Wallet ID. If you need a reminder ' />
             </Text>
             <LinkContainer to='/reminder'>

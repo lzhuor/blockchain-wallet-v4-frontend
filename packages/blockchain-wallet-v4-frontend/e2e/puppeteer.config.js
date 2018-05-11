@@ -2,7 +2,7 @@ module.exports = {
   launch: {
     dumpio: true,
     headless: false,
-    slowMo: 2000
+    slowMo: 5
   },
   server: {
     command: 'LOCAL_PROD=true node ./../../server.js',
