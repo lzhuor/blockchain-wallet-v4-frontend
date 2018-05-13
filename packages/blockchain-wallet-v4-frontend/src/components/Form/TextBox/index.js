@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-
 import { Text, TextInput } from 'blockchain-info-components'
 
 const Container = styled.div`
@@ -25,11 +24,13 @@ const getErrorState = (meta) => {
 
 const TextBox = (field) => {
   const errorState = getErrorState(field.meta)
+  // assists with functional test selectors
+  const elemId = `ft-${field.input.name}-error`
 
   return (
     <Container>
       <TextInput {...field.input} borderRightNone={field.borderRightNone} autoFocus={field.autoFocus} errorState={errorState} initial={field.meta.initial} placeholder={field.placeholder} center={field.center} />
-      {field.meta.touched && field.meta.error && <Error size='12px' weight={300} color='error' errorBottom={field.errorBottom}>{field.meta.error}</Error>}
+      {field.meta.touched && field.meta.error && <Error id={elemId} size='12px' weight={300} color='error' errorBottom={field.errorBottom}>{field.meta.error}</Error>}
     </Container>
   )
 }

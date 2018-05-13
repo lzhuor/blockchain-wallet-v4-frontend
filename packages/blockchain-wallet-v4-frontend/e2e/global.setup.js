@@ -5,6 +5,7 @@ const { exec, execSync } = require('child_process')
 exec('kill $(lsof -t -i:8080)')
 
 // check if application has already been compiled for production
+/* eslint-disable */
 if (fs.existsSync('./../../dist')) {
   console.log('Application dist folder found! Continuing...')
   process.exit(0)
@@ -13,3 +14,4 @@ if (fs.existsSync('./../../dist')) {
 
   return execSync('npm run ci:compile', { cwd: './..', stdio: 'inherit' })
 }
+/* eslint-enable */

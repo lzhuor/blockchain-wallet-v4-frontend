@@ -1,16 +1,21 @@
 module.exports = {
   login: {
     buttons: {
-      walletIdReminder: 'button[href="/reminder"]',
-      walletRecover: 'button[href="/recover"]',
+      defaultSubmit: 'button[type=submit]',
       wallet2faReset: 'button[href="/reset2fa"]',
-      walletLogin: 'button[type=submit]'
+      walletLogin: 'button[type=submit]',
+      walletIdReminder: 'button[href="/reminder"]',
+      walletRecover: 'button[href="/recover"]'
     },
     inputs: {
+      captcha: 'input[name=code]',
+      email: 'input[name=email]',
       walletGuid: 'input[name=guid]',
       walletKey: 'input[name=password]'
     },
     messages: {
+      invalidCaptcha: '#ft-code-error',
+      invalidEmail: '#ft-email-error',
       invalidGuid: '#ft-invalid-guid',
       invalidPassword: '#ft-invalid-pw'
     },

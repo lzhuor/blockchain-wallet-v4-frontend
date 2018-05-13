@@ -37,13 +37,15 @@ const getErrorState = (meta) => {
 
 const CaptchaBox = (field) => {
   const errorState = getErrorState(field.meta)
+  // assists with functional test selectors
+  const elemId = `ft-${field.input.name}-error`
 
   return (
     <Wrapper>
       <Image src={field.captchaUrl} />
       <Container>
         <TextInput {...field.input} errorState={errorState} />
-        {field.meta.touched && field.meta.error && <Error size='12px' weight={300} color='error'>{field.meta.error}</Error>}
+        {field.meta.touched && field.meta.error && <Error id={elemId} size='12px' weight={300} color='error'>{field.meta.error}</Error>}
       </Container>
     </Wrapper>
   )
