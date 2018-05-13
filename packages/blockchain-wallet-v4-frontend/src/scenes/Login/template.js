@@ -96,7 +96,7 @@ const Login = (props) => {
             <Field name='guid' validate={[required]} component={TextBox} borderColor={guidError ? 'invalid' : undefined} />
           </FormItem>
           { guidError && <GuidError inline>
-            <Text size='12px' color='error' weight={300} id='ft-error'>
+            <Text size='12px' color='error' weight={300} id='ft-invalid-guid'>
               <FormattedMessage id='scenes.login.guiderror' defaultMessage='Unknown Wallet ID. If you need a reminder ' />
             </Text>
             <LinkContainer to='/reminder'>
@@ -121,7 +121,7 @@ const Login = (props) => {
               <FormattedMessage id='scenes.login.password' defaultMessage='Password' />
             </FormLabel>
             <Field name='password' validate={[required]} component={PasswordBox} onChange={handlePasswordChange} borderColor={passwordError ? 'invalid' : undefined} />
-            { passwordError && <FormError position={authType > 0 ? 'relative' : 'absolute'}><FormattedMessage id='scenes.login.wrong_password' defaultMessage='Error decrypting wallet. Wrong password' /></FormError> }
+            { passwordError && <FormError id='ft-invalid-pw' position={authType > 0 ? 'relative' : 'absolute'}><FormattedMessage id='scenes.login.wrong_password' defaultMessage='Error decrypting wallet. Wrong password' /></FormError> }
             { accountLocked && <FormError position={authType > 0 || passwordError ? 'relative' : 'absolute'}>{loginError}</FormError> }
           </FormItem>
         </FormGroup>

@@ -8,9 +8,9 @@ const Error = styled(Text)`
 `
 
 const FormError = props => {
-  const { children, position } = props
+  const { children, position, id } = props
   return (
-    <Error weight={300} size='12px' color='error' position={position}>
+    <Error id={id} weight={300} size='12px' color='error' position={position}>
       {children}
     </Error>
   )

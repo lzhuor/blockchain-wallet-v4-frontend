@@ -3,6 +3,7 @@ module.exports = {
     guidInput: 'input[name=guid]',
     keyInput: 'input[name=password]',
     loginButton: 'button[type=submit]',
-    invalidGuidMsg: '#ft-error'
+    invalidGuidMsg: '#ft-invalid-guid',
+    invalidPasswordMsg: '#ft-invalid-pw'
   }
 }
