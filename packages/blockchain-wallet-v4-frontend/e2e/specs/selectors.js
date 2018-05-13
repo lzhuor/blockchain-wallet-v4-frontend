@@ -10,14 +10,21 @@ module.exports = {
     inputs: {
       captcha: 'input[name=code]',
       email: 'input[name=email]',
+      mnemonic: 'input[name=mnemonic]',
       walletGuid: 'input[name=guid]',
-      walletKey: 'input[name=password]'
+      walletKey: 'input[name=password]',
+      password: 'input[name=password]',
+      passwordConfirm: 'input[name=confirmationPassword]',
+      termsCheckbox: 'input[type=checkbox]'
     },
     messages: {
       invalidCaptcha: '#ft-code-error',
       invalidEmail: '#ft-email-error',
       invalidGuid: '#ft-invalid-guid',
-      invalidPassword: '#ft-invalid-pw'
+      invalidPassword: '#ft-invalid-pw',
+      invalidPasswordRecover: '#ft-password-error',
+      invalidPasswordConfirm: '#ft-confirmationPassword-error',
+      invalidMnemonic: '#ft-mnemonic-error'
     },
     links: {
       help: 'a[href="/help"]',

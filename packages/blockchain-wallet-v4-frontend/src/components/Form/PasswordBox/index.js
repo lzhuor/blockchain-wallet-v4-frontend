@@ -28,12 +28,14 @@ const getErrorState = (meta) => {
 const PasswordBox = (field) => {
   const errorState = getErrorState(field.meta)
   const scoreVisible = field.score ? field.input.value.length > 0 : false
+  // selectors for e2e tests
+  const elemId = `ft-${field.input.name}-error`
 
   return (
     <Container>
       <PasswordInput {...field.input} controlledBorderColor={field.borderColor} errorState={errorState} />
       { scoreVisible ? <PasswordScore value={field.input.value} /> : <div /> }
-      {field.meta.touched && field.meta.error && <Error size='12px' weight={300} color='error'>{field.meta.error}</Error>}
+      {field.meta.touched && field.meta.error && <Error id={elemId} size='12px' weight={300} color='error'>{field.meta.error}</Error>}
     </Container>
   )
 }
