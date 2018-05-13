@@ -5,7 +5,10 @@ module.exports = {
     base: baseUrl,
     home: `${baseUrl}/home`,
     login: `${baseUrl}/login`,
-    help: `${baseUrl}/help`
+    help: `${baseUrl}/help`,
+    walletReminder: `${baseUrl}/reminder`,
+    walletRecover: `${baseUrl}/recover`,
+    wallet2faReset: `${baseUrl}/reset2fa`
   },
   wallet: {
     validGuid: '564b1d95-10e3-4e06-bb92-fced7c545811',
