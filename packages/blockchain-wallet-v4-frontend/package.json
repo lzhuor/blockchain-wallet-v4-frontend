@@ -17,7 +17,7 @@
     "ci:compile": "NODE_ENV=production CI_BUILD=true webpack-cli --config webpack.config.js --display-error-details",
     "coverage": "./../../node_modules/.bin/jest --config=jest.config.js --coverage",
     "generate": "babel-node ./tools/generateDefaultLocale.js",
-    "integration": "node ./e2e/global.setup.js && JEST_PUPPETEER_CONFIG=./e2e/puppeteer.config.js ./../../node_modules/.bin/jest --config=./e2e/jest.config.js",
+    "integration": "node ./e2e/global.setup.js && JEST_PUPPETEER_CONFIG=./e2e/puppeteer.config.js ./../../node_modules/.bin/jest --config=./e2e/jest.config.js --runInBand",
     "run:prod": "npm run ci:compile && LOCAL_PROD=true node ./../../server.js",
     "start:dev": "NODE_ENV=development webpack-dev-server --config webpack.config.js --progress --colors --watch",
     "start:prod": "NODE_ENV=production webpack-dev-server --config webpack.config.js --progress --colors --watch",

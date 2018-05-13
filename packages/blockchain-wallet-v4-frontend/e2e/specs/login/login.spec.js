@@ -21,7 +21,7 @@ describe('Login Page', () => {
 
     it('should not be able to login with correct wallet guid and incorrect key', async () => {
       // reset button is disabled
-      expect(page).toMatchElement(`${selectors.buttons.defaultSubmit}:disabled`, slowTimeout)
+      await expect(page).toMatchElement(`${selectors.buttons.defaultSubmit}:disabled`, slowTimeout)
       await expect(page).toFill(selectors.inputs.walletGuid, constants.wallet.validGuid)
       await expect(page).toFill(selectors.inputs.walletKey, 'badpassword')
       await expect(page).toClick(selectors.buttons.walletLogin)
@@ -77,20 +77,20 @@ describe('Login Page', () => {
     })
 
     it('should link out to the correct support page', async () => {
-      // TODO
+      await expect(page).toClick(selectors.links.help, slowTimeout)
     })
   })
 
   describe('Wallet ID Reminder', () => {
     beforeEach(async () => {
-      await page.goto(constants.urls.walletReminder, { waitUntil: 'domcontentloaded' }, () => {
+      await page.goto(constants.urls.walletReminder, { waitUntil: 'domcontentloaded', timeout: 10000 }, () => {
         expect(page.url()).toEqual(constants.urls.walletReminder)
       })
     })
 
     it('should validate email address and captcha entered', async () => {
       // send reminder button is disabled by default
-      await expect(page).toMatchElement(`${selectors.buttons.defaultSubmit}:disabled`, slowTimeout)
+      await expect(page).toMatchElement(`${selectors.buttons.defaultSubmit}:disabled`, verySlowTimeout)
       // enter invalid email
       await expect(page).toFill(selectors.inputs.email, 'not-valid-email', slowTimeout)
       await page.focus(selectors.links.help)
@@ -119,7 +119,7 @@ describe('Login Page', () => {
 
     it('should be able to return to help page', async () => {
       // recover button is disabled
-      await expect(page).toMatchElement(`${selectors.buttons.defaultSubmit}:disabled`, slowTimeout)
+      await expect(page).toMatchElement(`${selectors.buttons.defaultSubmit}:disabled`, verySlowTimeout)
       await expect(page).toClick(selectors.links.help, slowTimeout)
       await page.once('networkidle0', () => {
         expect(page.url()).toEqual(constants.urls.help)
@@ -128,18 +128,14 @@ describe('Login Page', () => {
   })
 
   describe('2FA Reset', () => {
-    beforeEach(async () => {
-      await page.goto(constants.urls.wallet2faReset, { waitUntil: 'networkidle0' }, () => {
-        expect(page.url()).toEqual(constants.urls.wallet2faReset)
-      })
-    })
-
     it('should be able to return to help page', async () => {
-      // reset button is disabled
-      expect(page).toMatchElement(`${selectors.buttons.defaultSubmit}:disabled`, slowTimeout)
-      await expect(page).toClick(selectors.links.help, slowTimeout)
-      await page.once('networkidle0', (page) => {
-        expect(page.url()).toEqual(constants.urls.help)
+      await page.goto(constants.urls.wallet2faReset, { waitUntil: 'networkidle0' }, async () => {
+        expect(page.url()).toEqual(constants.urls.wallet2faReset)
+        await expect(page).toMatchElement(`${selectors.buttons.defaultSubmit}:disabled`, verySlowTimeout)
+        await expect(page).toClick(selectors.links.help, slowTimeout)
+        await page.once('networkidle0', (page) => {
+          expect(page.url()).toEqual(constants.urls.help)
+        })
       })
     })
   })
