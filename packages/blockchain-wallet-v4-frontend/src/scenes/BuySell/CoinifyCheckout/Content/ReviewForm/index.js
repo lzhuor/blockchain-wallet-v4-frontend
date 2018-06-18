@@ -15,7 +15,10 @@ const OrderSubmitForm = styled.form`
 `
 const TermsWrapper = styled.div`
   display: flex;
-  margin-bottom: 30px;
+  margin: 30px 0 30px 0;
+  @media (min-width: 992px) {
+    margin: 0 0 30px 0;
+  }
 `
 const TermsLabel = styled.label`
   padding-top: 3px;
