@@ -18,11 +18,11 @@ const ISXContainer = styled.div`
   }
 `
 const ButtonContainer = styled.div`
-  margin-top: 5%
+  margin-top: 5%;
   width: 20%;
   @media (min-width: 992px) {
     margin-left: 5%;
-    width: 60%;
+    width: 60%
   }
 `
 const TimerContainer = styled.div`
@@ -38,6 +38,12 @@ const QuoteExpiredText = styled(Text)`
   span:first-of-type {
     font-style: italic;
   }
+`
+const StyledIframe = styled.iframe`
+   width: 100%;
+   height: 400px;
+   border: 1px solid #EAEAEA;
+   @media(min-width: 480px) {width: '65%'}
 `
 
 const helpers = [
@@ -241,7 +247,7 @@ class ISignThisContainer extends Component {
           }).getOrElse(null)}
         </TimerContainer>
         <ISXContainer>
-          <iframe style={{ width: '65%', height: '400px', border: '1px solid #EAEAEA' }}
+          <StyledIframe
             src={srcUrl}
             sandbox='allow-same-origin allow-scripts allow-forms'
             scrolling='yes'
