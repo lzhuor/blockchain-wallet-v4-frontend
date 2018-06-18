@@ -28,6 +28,12 @@ const Header = styled.div`
 const HeaderIcon = styled(Icon)`
   margin-right: 10px;
 `
+const CloseIcon = styled(Icon)`
+    font-size: 14px;
+  @media (min-width: 480px) {
+    font-size: 20px;
+  }
+`
 
 const ModalHeader = props => {
   const { closeButton, onClose, icon, children, paddingHorizontal } = props
@@ -40,7 +46,7 @@ const ModalHeader = props => {
           { children }
         </Text>
       </Header>
-      {closeButton && <Icon name='close' size='20px' weight={300} color='gray-5' cursor onClick={onClose} />}
+      {closeButton && <CloseIcon name='close' weight={300} color='gray-5' cursor onClick={onClose} />}
     </Wrapper>
   )
 }

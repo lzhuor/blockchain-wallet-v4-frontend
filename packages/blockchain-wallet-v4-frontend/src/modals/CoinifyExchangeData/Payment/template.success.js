@@ -15,12 +15,21 @@ import { cardOptionHelper, bankOptionHelper } from './mediumHelpers'
 
 const PaymentWrapper = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: normal;
+  }
 `
 
 const BorderBox = styled.div`
-  border: 1px solid ${props => props.theme['gray-1']};
-  padding: 30px;
+  border: none;
+  width: 100%
+  @media (min-width: 480px) {
+    padding: 30px;
+    border: 1px solid ${props => props.theme['gray-1']};
+  }
 `
 
 const helpers = [

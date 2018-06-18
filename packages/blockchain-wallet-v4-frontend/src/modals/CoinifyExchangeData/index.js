@@ -17,7 +17,10 @@ import { path } from 'ramda'
 
 const HeaderWrapper = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  @media(min-width: 992px) {
+    flex-direction: row;
+  }
 `
 
 class CoinifyExchangeData extends React.PureComponent {

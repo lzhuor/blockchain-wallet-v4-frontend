@@ -3,7 +3,10 @@ import styled from 'styled-components'
 export const Form = styled.form`
   width: 100%;
   display: flex;
+  flex-direction: column;
+  @media (min-width: 480px){
   flex-direction: row;
+  }
 `
 
 export const Row = styled.div`
@@ -13,7 +16,10 @@ export const Row = styled.div`
 `
 
 export const ColLeft = styled.div`
+  width: 100%;
+  @media (min-width: 480px){
   width: 50%;
+  }
 `
 
 export const ColLeftInner = styled.div`
@@ -34,13 +40,19 @@ export const InputWrapper = styled.div`
 `
 
 export const PartnerHeader = styled.div`
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 600;
+  @media (min-width: 480px) {
+    font-size: 30px;
+  }
 `
 
 export const PartnerSubHeader = styled.div`
   margin-top: 5px;
-  font-size: 16px;
+  font-size: 12px;
+  @media (min-width: 480px) {
+    font-size: 16px;
+  }
 `
 
 export const ButtonWrapper = styled.div`
