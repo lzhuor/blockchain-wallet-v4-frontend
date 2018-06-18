@@ -12,11 +12,18 @@ import * as Currency from 'blockchain-wallet-v4/src/exchange/currency'
 
 const ISXContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  @media (min-width: 992px) {
+    flex-direction: row;
+  }
 `
 const ButtonContainer = styled.div`
-  margin-left: 5%;
+  margin-top: 5%
   width: 20%;
+  @media (min-width: 992px) {
+    margin-left: 5%;
+    width: 60%;
+  }
 `
 const TimerContainer = styled.div`
   width: 66%;

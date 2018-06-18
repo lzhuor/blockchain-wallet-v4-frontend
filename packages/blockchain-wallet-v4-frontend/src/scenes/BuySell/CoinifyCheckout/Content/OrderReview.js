@@ -12,6 +12,18 @@ import { BorderBox, Row } from 'components/BuySell/Signup'
 import { StepTransition } from 'components/Utilities/Stepper'
 import ReviewForm from './ReviewForm'
 
+const ReviewTextOne = styled(Text)`
+  font-size: 20px;
+  @media (min-width: 480) {
+    font-size: 32px;
+  }
+`
+const ReviewTextTwo = styled(Text)`
+font-size: 12px;
+@media (min-width: 480) {
+  font-size: 14px;
+}
+`
 const ExchangeRateWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -30,12 +42,12 @@ const rateHelper = (quoteR) =>
 export const OrderDetails = ({ quoteR, onRefreshQuote, type, medium }) => (
   <Row>
     <BorderBox>
-      <Text size='32px' weight={600} style={spacing('mb-10')}>
+      <ReviewTextOne weight={600} style={spacing('mb-10')}>
         <FormattedMessage id='scenes.buysell.coinifycheckout.content.orderreview.buy.almostthere' defaultMessage="You're almost there" />
-      </Text>
-      <Text size='14px' weight={300} style={spacing('mb-20')}>
+      </ReviewTextOne>
+      <ReviewTextTwo weight={300} style={spacing('mb-20')}>
         <FormattedMessage id='scenes.buysell.coinifycheckout.content.orderreview.buy.revieworder.subtext' defaultMessage='Before we can start processing your order, review the order details below. If everything looks good to you, click submit to complete your order.' />
-      </Text>
+      </ReviewTextTwo>
       <ExchangeRateWrapper>
         <Text size='12px' weight={500} style={spacing('mr-10')}>
           <FormattedMessage id='scenes.buysell.coinifycheckout.content.orderreview.exchangerate' defaultMessage='Exchange Rate' />
