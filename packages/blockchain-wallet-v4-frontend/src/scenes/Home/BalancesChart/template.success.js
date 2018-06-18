@@ -53,8 +53,21 @@ const Column = styled.div`
 const ColourBar = styled.div`
   width: 100%;
   height: 4px;
+  margin-bottom: 0px;
   background-color: ${props => props.theme[props.color]};
+  @media (min-width: 480px) {
+    margin-bottom: 4px;
+  }
 `
+const CurrencyText = styled(Text)`
+  margin-top: 4px;
+  font-size: 12px;
+  @media (min-width: 480px) {
+    margin-top: 0;
+    font-size: 14px;
+  }
+`
+
 const CoinBalance = styled.div`
   cursor: pointer;
   font-size: 14px;
@@ -86,11 +99,11 @@ const BalancesChart = (props) => {
       <ChartInfo>
         <Column>
           <ColourBar color='brand-primary' />
-          <Text size='14px' weight={300}>
+          <CurrencyText weight={300}>
             <FormattedMessage id='scenes.home.balanceschart.btc' defaultMessage='Bitcoin' />
-          </Text>
+          </CurrencyText>
           <CoinBalance onClick={handleCoinDisplay}>
-            <SwitchableDisplay coin='BTC' cursor='pointer' size='14px' weight={200}>{btcBalance}</SwitchableDisplay>
+            <SwitchableDisplay coin='BTC' cursor='pointer' mobileSize='12px' size='14px' weight={200}>{btcBalance}</SwitchableDisplay>
           </CoinBalance>
           { partner
             ? btcBalance <= 0 && <WalletLink to='/buy-sell' size='10px' weight={300}>
@@ -115,11 +128,11 @@ const BalancesChart = (props) => {
         </Column>
         <Column>
           <ColourBar color='brand-secondary' />
-          <Text size='14px' weight={300}>
+          <CurrencyText weight={300}>
             <FormattedMessage id='scenes.home.balanceschart.eth' defaultMessage='Ether' />
-          </Text>
+          </CurrencyText>
           <CoinBalance onClick={handleCoinDisplay}>
-            <SwitchableDisplay coin='ETH' cursor='pointer' size='14px' weight={200}>{ethBalance}</SwitchableDisplay>
+            <SwitchableDisplay coin='ETH' cursor='pointer' mobileSize='12px' size='14px' weight={200}>{ethBalance}</SwitchableDisplay>
           </CoinBalance>
           { (btcBalance > 0 || bchBalance > 0) && ethBalance <= 0
             ? <WalletLink to='/exchange' size='10px' weight={300}>
@@ -132,11 +145,11 @@ const BalancesChart = (props) => {
         </Column>
         <Column>
           <ColourBar color='brand-tertiary' />
-          <Text size='14px' weight={300}>
+          <CurrencyText weight={300}>
             <FormattedMessage id='scenes.home.balanceschart.bch' defaultMessage='Bitcoin Cash' />
-          </Text>
+          </CurrencyText>
           <CoinBalance onClick={handleCoinDisplay}>
-            <SwitchableDisplay coin='BCH' cursor='pointer' size='14px' weight={200}>{bchBalance}</SwitchableDisplay>
+            <SwitchableDisplay coin='BCH' cursor='pointer' mobileSize='12px' size='14px' weight={200}>{bchBalance}</SwitchableDisplay>
           </CoinBalance>
           { (btcBalance > 0 || ethBalance > 0) && bchBalance <= 0
             ? <WalletLink to='/exchange' size='10px' weight={300}>
