@@ -17,7 +17,7 @@ export const Row = styled.div`
 
 export const ColLeft = styled.div`
   width: 100%;
-  @media (min-width: 480px){
+@media (min-width: 480px){
   width: 50%;
   }
 `
@@ -27,7 +27,13 @@ export const ColLeftInner = styled.div`
 `
 
 export const ColRight = styled.div`
+  width: 100%;
+  align-items: center;
+@media (min-width: 480px){
   width: 50%;
+  align-items: normal;
+}
+
 `
 
 export const Info = styled.div`
@@ -82,8 +88,12 @@ export const ErrorWrapper = styled.div`
 export const ColRightInner = styled.div`
   display: flex;
   flex-direction: column;
-  width: 80%;
-  padding-left: 20%;
+  width: 100%;
+  padding-left: 0;
+  @media (min-width: 480px) {
+    padding-left: 20%;
+    width: 80%;
+  }
 `
 
 export const EmailHelper = styled.span`

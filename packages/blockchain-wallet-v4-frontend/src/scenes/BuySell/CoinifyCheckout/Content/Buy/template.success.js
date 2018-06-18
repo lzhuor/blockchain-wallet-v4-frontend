@@ -18,6 +18,7 @@ import BankTransferDetails from 'components/BuySell/BankTransferDetails'
 
 const CheckoutWrapper = styled.div`
 display: flex;
+flex-direction: column;
   @media (min-width: 992px) {
     display: grid;
     grid-template-columns: 55% 40%;

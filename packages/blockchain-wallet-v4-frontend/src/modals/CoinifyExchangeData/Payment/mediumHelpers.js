@@ -9,11 +9,14 @@ import { StepTransition } from 'components/Utilities/Stepper'
 import { equals, path } from 'ramda'
 
 const PaymentOptionContainer = styled.div`
-  width: 50%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  @media (min-width: 480px) {
+    width: 50%
+  }
 `
 const PaymentOption = styled.div`
   display: flex;
@@ -31,6 +34,15 @@ const OptionLabel = styled.label`
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+`
+const HelperText = styled(Text)`
+  font-size: 12px;
+  margin: 10px 0 10px 0;
+@media (min-width: 480px) {
+  font-size: 14px;
+  margin: 25px 0 10px 0;
+}
+
 `
 const PaymentIcon = styled(Icon)`
   color: ${props => props.isChecked ? 'white' : props.theme['brand-primary']}
@@ -62,11 +74,11 @@ export const cardOptionHelper = (quote, limits, isChecked, handlePaymentClick, c
   const renderContainer = (isChecked, handlePaymentClick) => (
     <PaymentOptionContainer>
       { renderField() }
-      <Text size='14px' weight={300} style={spacing('mt-25')}>
+      <HelperText size='14px' weight={300}>
         <FormattedMessage id='coinifyexchangedata.payment.mediumhelpers.card.detail1' defaultMessage='Receive bitcoin instantly' /><br />
         <FormattedMessage id='coinifyexchangedata.payment.mediumhelpers.card.detail2' defaultMessage='3% convenience fee' /><br />
         <FormattedMessage id='coinifyexchangedata.payment.mediumhelpers.card.detail3' defaultMessage='Visa or Mastercard' />
-      </Text>
+      </HelperText>
     </PaymentOptionContainer>
   )
 
@@ -127,11 +139,11 @@ export const bankOptionHelper = (quote, limits, isChecked, handlePaymentClick, b
                 : null
             }
           </BankDisabledText>
-          : <Text size='14px' weight={300} style={spacing('mt-25')}>
+          : <HelperText size='14px' weight={300}>
             <FormattedMessage id='coinifyexchangedata.payment.mediumhelpers.bank.detail1' defaultMessage='One time ID verification' /><br />
             <FormattedMessage id='coinifyexchangedata.payment.mediumhelpers.bank.detail2' defaultMessage='Receive bitcoin in 2-3 days' /><br />
             <FormattedMessage id='coinifyexchangedata.payment.mediumhelpers.bank.detail3' defaultMessage='0.25% Payment Fee' />
-          </Text>
+          </HelperText>
       }
     </PaymentOptionContainer>
   )
