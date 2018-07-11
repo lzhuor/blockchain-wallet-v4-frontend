@@ -16,6 +16,8 @@ import EmptyOrderHistoryContainer from 'components/BuySell/EmptyOrderHistory'
 import SiftScience from 'modals/SfoxExchangeData/sift-science.js'
 import media from 'services/ResponsiveService'
 
+import Jumio from './Jumio'
+
 const CheckoutWrapper = styled.div`
   width: 50%;
   ${media.mobile`
@@ -164,6 +166,9 @@ const Success = props => {
       </Stepper>
     )
   } else if (type === 'sell') {
+    if (true) {
+      return <Jumio />
+    }
     return (
       <Stepper key='SellStepper' initialStep={0}>
         <StepView step={0}>

@@ -16,5 +16,6 @@ export default ({ api, options }) => {
     yield takeLatest(AT.GET_BANK_ACCOUNTS, dataSfoxSagas.getBankAccounts)
     yield takeLatest(AT.RESET_PROFILE, dataSfoxSagas.resetProfile)
     yield takeLatest(AT.REFETCH_PROFILE, dataSfoxSagas.refetchProfile)
+    yield takeLatest(AT.START_ENHANCED_VERIFICATION, dataSfoxSagas.startEnhancedVerification)
   }
 }

@@ -293,6 +293,17 @@ export default ({ api, options }) => {
     }
   }
 
+  const startEnhancedVerification = function * () {
+    try {
+      const sfox = yield call(getSfox)
+      const profile = yield select(S.getProfile)
+      const enhancedVerification = yield apply(profile.data, profile.data.startEnhancedVerification)
+      console.log('startEnhanced', enhancedVerification, profile, sfox)
+    } catch (e) {
+      console.warn(e)
+    }
+  }
+
   return {
     init,
     fetchSfoxAccounts,
@@ -311,6 +322,7 @@ export default ({ api, options }) => {
     handleTrade,
     handleSellTrade,
     labelAddressForBuy,
-    refetchProfile
+    refetchProfile,
+    startEnhancedVerification
   }
 }

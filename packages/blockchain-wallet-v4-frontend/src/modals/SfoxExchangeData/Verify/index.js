@@ -7,6 +7,7 @@ import { path, equals } from 'ramda'
 import { actions } from 'data'
 import ui from 'redux-ui'
 import Upload from '../Upload'
+import Jumio from '../Jumio'
 
 import Helper from 'components/BuySell/FAQ'
 
@@ -60,6 +61,7 @@ class VerifyContainer extends Component {
 
   render () {
     if (this.props.step === 'upload') return <Upload />
+    if (this.props.step === 'jumio') return <Jumio />
     if (this.props.ui.verify === 'address') return <Address {...this.props} faqs={faqHelper} />
     if (this.props.ui.verify === 'identity') return <Identity {...this.props} toggleSSN={() => this.setState({ viewSSN: !this.state.viewSSN })} viewSSN={this.state.viewSSN} faqs={faqHelper} handleSubmit={this.handleSubmit} handleReset={this.handleReset} />
   }

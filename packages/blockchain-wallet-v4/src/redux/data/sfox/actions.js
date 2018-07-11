@@ -66,3 +66,5 @@ export const resetProfile = () => ({ type: AT.RESET_PROFILE })
 export const getDelegateTokenSuccess = (token) => ({ type: AT.GET_DELEGATE_TOKEN_SUCCESS, token })
 
 export const setToken = (token) => ({ type: AT.SET_TOKEN, payload: token })
+
+export const startEnhancedVerification = () => ({ type: AT.START_ENHANCED_VERIFICATION })

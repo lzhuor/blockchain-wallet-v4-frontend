@@ -46,6 +46,7 @@ class SfoxExchangeData extends React.PureComponent {
       case 'verify': return { component: <Verify />, step: 'verify' }
       case 'funding': return { component: <Link />, step: 'funding' }
       case 'upload': return { component: <Verify step='upload' />, step: 'verify' }
+      case 'jumio': return { component: <Verify step='jumio' />, step: 'verify' }
       case 'verified': {
         this.handleClose()
         break
@@ -55,7 +56,7 @@ class SfoxExchangeData extends React.PureComponent {
 
   render () {
     const { show } = this.state
-    const step = this.props.signupStep || this.props.step
+    const step = this.props.step || this.props.signupStep
 
     return (
       <Tray position={this.props.position} total={this.props.total} in={show} class='tray' onClose={this.handleClose.bind(this)}>

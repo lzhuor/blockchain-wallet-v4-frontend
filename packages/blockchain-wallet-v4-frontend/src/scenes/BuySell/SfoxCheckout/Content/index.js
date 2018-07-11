@@ -20,6 +20,7 @@ class SfoxCheckout extends React.PureComponent {
     this.props.sfoxDataActions.fetchQuote({quote: { amt: 1e8, baseCurrency: 'BTC', quoteCurrency: 'USD' }})
     this.props.sfoxDataActions.fetchSellQuote({quote: { amt: 1e8, baseCurrency: 'BTC', quoteCurrency: 'USD' }})
     this.props.sfoxActions.initializePayment()
+    this.props.modalActions.showModal('JumioPrompt')
   }
 
   componentWillUnmount () {

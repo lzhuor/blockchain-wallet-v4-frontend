@@ -10,6 +10,7 @@ import DeleteAddressLabel from './DeleteAddressLabel'
 import EditTxDescription from './EditTxDescription'
 import ExchangeDetails from './ExchangeDetails'
 import ImportBtcAddress from './ImportBtcAddress'
+import JumioPrompt from './JumioPrompt'
 import MobileNumberChange from './MobileNumberChange'
 import MobileNumberVerify from './MobileNumberVerify'
 import MobileLogin from './MobileLogin'
@@ -53,6 +54,7 @@ const Modals = props => (
     <EditTxDescription />
     <ExchangeDetails />
     <ImportBtcAddress />
+    <JumioPrompt />
     <MobileNumberChange />
     <MobileNumberVerify />
     <MobileLogin />
