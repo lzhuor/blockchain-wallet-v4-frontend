@@ -218,8 +218,30 @@ export default ({ coreSagas }) => {
     }
   }
 
+  const getJumio = function * () {
+    try {
+      yield put(A.sfoxLoading())
+      const jumioStatus = yield call(coreSagas.data.sfox.getEnhancedVerificationStatus)
+      console.log('sfox frontend getJumio', jumioStatus)
+    } catch (e) {
+      yield put(actions.logs.logErrorMessage(logLocation, 'getJumio', e))
+    }
+  }
+
+  const initializeJumio = function * () {
+    try {
+      yield put(A.sfoxLoading())
+      const jumioInitialized = yield call(coreSagas.data.sfox.startEnhancedVerification)
+      console.log('sfox frontend initializeJumio', jumioInitialized)
+    } catch (e) {
+      yield put(actions.logs.logErrorMessage(logLocation, 'getJumio', e))
+    }
+  }
+
   return {
     checkForProfileFailure,
+    getJumio,
+    initializeJumio,
     initializePayment,
     prepareAddress,
     setBankManually,

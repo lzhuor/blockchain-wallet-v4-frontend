@@ -19,3 +19,5 @@ export const coinifySetProfileBuySell = (payload) => ({ type: AT.COINIFY_SET_PRO
 
 export const wipeExternal = () => ({ type: AT.WIPE_EXTERNAL })
 export const wipeExternalSfox = () => ({ type: AT.WIPE_EXTERNAL_SFOX })
+
+export const setJumioData = (payload) => ({ type: AT.SET_JUMIO_DATA, payload })

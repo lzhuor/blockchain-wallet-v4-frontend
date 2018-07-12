@@ -1,5 +1,5 @@
 import { apply, fork, call, put, select, take } from 'redux-saga/effects'
-import { path, prepend } from 'ramda'
+import { path, prepend, prop } from 'ramda'
 
 import ExchangeDelegate from '../../../exchange/delegate'
 import * as S from './selectors'
@@ -297,8 +297,31 @@ export default ({ api, options }) => {
     try {
       const sfox = yield call(getSfox)
       const profile = yield select(S.getProfile)
-      const enhancedVerification = yield apply(profile.data, profile.data.startEnhancedVerification)
-      console.log('startEnhanced', enhancedVerification, profile, sfox)
+      const enhancedVerificationData = yield apply(profile.data, profile.data.startEnhancedVerification)
+      console.log('startEnhanced', enhancedVerificationData, profile, sfox)
+
+      if (prop('success', enhancedVerificationData)) {
+        // save jumio token and id to metadata
+        yield put(buySellA.setJumioData({
+          token: prop('authorizationToken', enhancedVerificationData), id: prop('id', enhancedVerificationData)
+        }))
+      }
+      return enhancedVerificationData
+    } catch (e) {
+      console.warn(e)
+    }
+  }
+
+  const getEnhancedVerificationStatus = function * () {
+    try {
+      const sfox = yield call(getSfox)
+      const profile = yield select(S.getProfile)
+
+      const jumioId = yield select(buySellSelectors.getJumioId)
+      console.log('after jumio selectors', jumioId, profile)
+      const enhancedVerificationStatus = yield apply(profile.data, profile.data.getEnhancedVerificationStatus, [jumioId.getOrElse()]) // replace with real id
+      console.log('getEnhancedVerificationStatus', enhancedVerificationStatus, profile, jumioId)
+      return enhancedVerificationStatus
     } catch (e) {
       console.warn(e)
     }
@@ -312,6 +335,7 @@ export default ({ api, options }) => {
     fetchQuote,
     fetchSellQuote,
     getBankAccounts,
+    getEnhancedVerificationStatus,
     resetProfile,
     setBankManually,
     signup,

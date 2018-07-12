@@ -68,3 +68,4 @@ export const getDelegateTokenSuccess = (token) => ({ type: AT.GET_DELEGATE_TOKEN
 export const setToken = (token) => ({ type: AT.SET_TOKEN, payload: token })
 
 export const startEnhancedVerification = () => ({ type: AT.START_ENHANCED_VERIFICATION })
+export const getEnhancedVerificationStatus = () => ({ type: AT.GET_ENHANCED_VERIFICATION_STATUS })

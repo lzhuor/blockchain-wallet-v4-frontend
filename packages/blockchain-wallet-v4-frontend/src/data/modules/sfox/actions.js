@@ -36,3 +36,6 @@ export const initializePayment = payload => ({ type: AT.SFOX_INITIALIZE_PAYMENT,
 export const sfoxSellBtcPaymentUpdatedSuccess = payment => ({ type: AT.SFOX_SELL_BTC_PAYMENT_UPDATED_SUCCESS, payload: payment })
 export const sfoxSellBtcPaymentUpdatedLoading = () => ({ type: AT.SFOX_SELL_BTC_PAYMENT_UPDATED_LOADING })
 export const sfoxSellBtcPaymentUpdatedFailure = (err) => ({ type: AT.SFOX_SELL_BTC_PAYMENT_UPDATED_FAILURE, payload: err })
+
+export const initializeJumio = () => ({ type: AT.INITIALIZE_JUMIO })
+export const getJumio = () => ({ type: AT.GET_JUMIO })

@@ -67,6 +67,14 @@ export default (state = INITIAL_STATE, action) => {
       const wipe = assoc('sfox', { trades: [] })
       return over(valueLens, wipe, state)
     }
+    case AT.SET_JUMIO_DATA: {
+      const valueLens = compose(mapped, KVStoreEntry.value)
+      const setJumio = compose(
+        assocPath(['sfox', 'jumioAuthToken'], payload.token),
+        assocPath(['sfox', 'jumioId'], payload.id)
+      )
+      return over(valueLens, setJumio, state)
+    }
     default:
       return state
   }

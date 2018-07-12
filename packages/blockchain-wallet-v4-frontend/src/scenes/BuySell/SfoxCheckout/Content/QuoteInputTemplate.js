@@ -152,7 +152,7 @@ FiatConvertor.propTypes = {
   fiat: PropTypes.string,
   unit: PropTypes.string.isRequired,
   currency: PropTypes.string.isRequired,
-  disabled: PropTypes.bool,
+  disabled: PropTypes.func,
   handleBlur: PropTypes.func.isRequired,
   handleCoinChange: PropTypes.func.isRequired,
   handleFiatChange: PropTypes.func.isRequired,

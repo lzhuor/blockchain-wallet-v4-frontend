@@ -16,3 +16,6 @@ export const getBuySellTxHashMatch = (state, hash) => {
   const shouldHaveLabel = contains(hash, tradeHashes)
   return shouldHaveLabel ? 'buy-sell' : false
 }
+
+export const getJumioToken = state => getMetadata(state).map(path(['value', 'sfox', 'jumioAuthToken']))
+export const getJumioId = state => getMetadata(state).map(path(['value', 'sfox', 'jumioId']))

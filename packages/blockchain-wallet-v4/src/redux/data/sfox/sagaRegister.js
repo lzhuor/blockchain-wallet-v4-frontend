@@ -17,5 +17,6 @@ export default ({ api, options }) => {
     yield takeLatest(AT.RESET_PROFILE, dataSfoxSagas.resetProfile)
     yield takeLatest(AT.REFETCH_PROFILE, dataSfoxSagas.refetchProfile)
     yield takeLatest(AT.START_ENHANCED_VERIFICATION, dataSfoxSagas.startEnhancedVerification)
+    yield takeLatest(AT.GET_ENHANCED_VERIFICATION_STATUS, dataSfoxSagas.getEnhancedVerificationStatus)
   }
 }
