@@ -8,7 +8,8 @@ const INITIAL_STATE = {
   trades: Remote.NotAsked,
   profile: Remote.NotAsked,
   achAccounts: Remote.NotAsked,
-  nextAddress: null
+  nextAddress: null,
+  jumioStatus: Remote.NotAsked
 }
 
 const sfoxReducer = (state = INITIAL_STATE, action) => {
@@ -122,6 +123,15 @@ const sfoxReducer = (state = INITIAL_STATE, action) => {
     }
     case AT.SET_TOKEN: {
       return assoc('accountToken', payload.token, state)
+    }
+    case AT.GET_ENHANCED_VERIFICATION_STATUS_LOADING: {
+      return assoc('jumioStatus', Remote.Loading, state)
+    }
+    case AT.GET_ENHANCED_VERIFICATION_STATUS_SUCCESS: {
+      return assoc('jumioStatus', Remote.Success(payload), state)
+    }
+    case AT.GET_ENHANCED_VERIFICATION_STATUS_FAILURE: {
+      return assoc('jumioStatus', Remote.Failure(payload), state)
     }
     default:
       return state

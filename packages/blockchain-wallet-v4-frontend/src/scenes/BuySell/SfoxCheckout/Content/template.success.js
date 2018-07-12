@@ -15,6 +15,7 @@ import Helper from 'components/BuySell/FAQ'
 import EmptyOrderHistoryContainer from 'components/BuySell/EmptyOrderHistory'
 import SiftScience from 'modals/SfoxExchangeData/sift-science.js'
 import media from 'services/ResponsiveService'
+import JumioStatus from './JumioStatus'
 
 const CheckoutWrapper = styled.div`
   width: 50%;
@@ -65,7 +66,7 @@ const faqList = [
   }
 ]
 
-const faqListHelper = () => faqList.map(el => <Helper question={el.question} answer={el.answer} />)
+const faqListHelper = () => faqList.map((el, i) => <Helper key={i} question={el.question} answer={el.answer} />)
 
 const isPending = (t) => equals(prop('state', t), 'processing')
 const isCompleted = (t) => !isPending(t)
@@ -91,6 +92,7 @@ const Success = props => {
     disableButton,
     enableButton,
     buttonStatus,
+    jumioStatus,
     ...rest } = props
 
   const accounts = Remote.of(props.value.accounts).getOrElse([])
@@ -135,6 +137,11 @@ const Success = props => {
               />
             </CheckoutWrapper>
             <OrderSubmitWrapper>
+              {
+                Remote.Success.is(jumioStatus)
+                  ? <JumioStatus {...jumioStatus.getOrElse()} />
+                  : null
+              }
               {faqListHelper()}
             </OrderSubmitWrapper>
           </SfoxBuySellContainer>

@@ -16,3 +16,5 @@ export const getAccounts = path([dataPath, 'sfox', 'achAccounts'])
 export const getVerificationStatus = state => getProfile(state).map(path(['verificationStatus']))
 
 export const getBankAccounts = path([dataPath, 'sfox', 'bankAccounts'])
+
+export const getJumioStatus = path(['dataPath', 'sfox', 'jumioStatus'])

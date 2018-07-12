@@ -2,10 +2,10 @@ import React from 'react'
 import { actions } from 'data'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getBase, getData, getErrors, getQuote, getSellQuote, getTrades, getPayment } from './selectors'
+import { getBase, getData, getErrors, getQuote, getSellQuote, getTrades, getPayment, getJumioStatus } from './selectors'
 import Success from './template.success'
 import Loading from 'components/BuySell/Loading'
-import { path } from 'ramda'
+import { path, prop } from 'ramda'
 import Failure from 'components/BuySell/Failure'
 
 class SfoxCheckout extends React.PureComponent {
@@ -20,7 +20,15 @@ class SfoxCheckout extends React.PureComponent {
     this.props.sfoxDataActions.fetchQuote({quote: { amt: 1e8, baseCurrency: 'BTC', quoteCurrency: 'USD' }})
     this.props.sfoxDataActions.fetchSellQuote({quote: { amt: 1e8, baseCurrency: 'BTC', quoteCurrency: 'USD' }})
     this.props.sfoxActions.initializePayment()
-    this.props.modalActions.showModal('JumioPrompt')
+    this.props.modalActions.showModal('JumioPrompt') // will need logic for this to show / not show
+  }
+
+  componentDidUpdate (prevProps) {
+    const prev = prevProps.data.getOrElse()
+    const props = this.props.data.getOrElse()
+    if (prop('profile', prev) !== prop('profile', props)) {
+      this.props.sfoxActions.getJumio()
+    }
   }
 
   componentWillUnmount () {
@@ -28,7 +36,7 @@ class SfoxCheckout extends React.PureComponent {
   }
 
   render () {
-    const { data, modalActions, sfoxActions, sfoxDataActions, payment, orderState, formActions, siftScienceEnabled } = this.props
+    const { data, modalActions, sfoxActions, sfoxDataActions, payment, orderState, formActions, siftScienceEnabled, jumioStatus } = this.props
     const { handleTrade, fetchQuote, refreshQuote, refreshSellQuote, fetchSellQuote } = sfoxDataActions
     const { sfoxNotAsked } = sfoxActions
     const { showModal } = modalActions
@@ -60,6 +68,7 @@ class SfoxCheckout extends React.PureComponent {
         enableButton={() => this.setState({ buttonStatus: true })}
         buttonStatus={this.state.buttonStatus}
         siftScienceEnabled={siftScienceEnabled}
+        jumioStatus={jumioStatus}
       />,
       Failure: (error) => <Failure error={error} />,
       Loading: () => <Loading />,
@@ -76,6 +85,7 @@ const mapStateToProps = state => ({
   trades: getTrades(state),
   errors: getErrors(state),
   payment: getPayment(state),
+  jumioStatus: getJumioStatus(state),
   orderState: path(['sfoxSignup', 'sfoxBusy'], state),
   siftScienceEnabled: path(['sfoxSignup', 'siftScienceEnabled'], state)
 })

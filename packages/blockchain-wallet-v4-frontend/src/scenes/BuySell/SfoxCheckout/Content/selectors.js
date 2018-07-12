@@ -27,3 +27,5 @@ export const getErrors = (state) =>
   path(['form', 'exchangeCheckout', 'syncErrors'], state)
 
 export const getPayment = path(['sfoxSignup', 'payment'])
+
+export const getJumioStatus = (state) => selectors.core.data.sfox.getJumioStatus(state)

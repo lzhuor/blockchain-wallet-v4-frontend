@@ -15,21 +15,23 @@ class JumioContainer extends Component {
     this.getJumio = this.getJumio.bind(this)
   }
 
+  componentWillUnmount () {
+    this.props.sfoxActions.getJumio()
+  }
+
   initJumio () {
-    console.log('init jumio')
-    this.props.sfoxFrontendActions.initializeJumio()
+    this.props.sfoxActions.initializeJumio()
   }
 
   getJumio () {
-    console.log('get jumio')
-    this.props.sfoxFrontendActions.getJumio()
+    this.props.sfoxActions.getJumio()
   }
 
   render () {
     const { data } = this.props
-    console.log('jumio render', this.props)
+
     return data.cata({
-      Success: (value) => <Success {...value} />,
+      Success: (value) => <Success {...value} initJumio={this.initJumio} getJumio={this.getJumio} />,
       Failure: (msg) => <Failure error={msg} />,
       Loading: () => <div>Loading...</div>,
       NotAsked: () => <div />
@@ -43,7 +45,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   formActions: bindActionCreators(actions.form, dispatch),
-  sfoxFrontendActions: bindActionCreators(actions.modules.sfox, dispatch)
+  sfoxActions: bindActionCreators(actions.modules.sfox, dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(JumioContainer)

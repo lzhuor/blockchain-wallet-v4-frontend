@@ -69,3 +69,6 @@ export const setToken = (token) => ({ type: AT.SET_TOKEN, payload: token })
 
 export const startEnhancedVerification = () => ({ type: AT.START_ENHANCED_VERIFICATION })
 export const getEnhancedVerificationStatus = () => ({ type: AT.GET_ENHANCED_VERIFICATION_STATUS })
+export const getEnhancedVerificationStatusLoading = () => ({ type: AT.GET_ENHANCED_VERIFICATION_STATUS_LOADING })
+export const getEnhancedVerificationStatusSuccess = (payload) => ({ type: AT.GET_ENHANCED_VERIFICATION_STATUS_SUCCESS, payload })
+export const getEnhancedVerificationStatusFailure = () => ({ type: AT.GET_ENHANCED_VERIFICATION_STATUS_FAILURE })

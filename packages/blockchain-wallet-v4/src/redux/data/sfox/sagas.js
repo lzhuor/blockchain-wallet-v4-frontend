@@ -1,6 +1,6 @@
 import { apply, fork, call, put, select, take } from 'redux-saga/effects'
 import { path, prepend, prop } from 'ramda'
-
+import Remote from '../../../remote'
 import ExchangeDelegate from '../../../exchange/delegate'
 import * as S from './selectors'
 import * as A from './actions'
@@ -314,16 +314,15 @@ export default ({ api, options }) => {
 
   const getEnhancedVerificationStatus = function * () {
     try {
-      const sfox = yield call(getSfox)
+      yield put(A.getEnhancedVerificationStatusLoading())
       const profile = yield select(S.getProfile)
 
       const jumioId = yield select(buySellSelectors.getJumioId)
-      console.log('after jumio selectors', jumioId, profile)
       const enhancedVerificationStatus = yield apply(profile.data, profile.data.getEnhancedVerificationStatus, [jumioId.getOrElse()]) // replace with real id
-      console.log('getEnhancedVerificationStatus', enhancedVerificationStatus, profile, jumioId)
+      yield put(A.getEnhancedVerificationStatusSuccess(enhancedVerificationStatus))
       return enhancedVerificationStatus
     } catch (e) {
-      console.warn(e)
+      yield put(A.getEnhancedVerificationStatusFailure())
     }
   }
 
