@@ -11,6 +11,7 @@ import { MethodContainer } from 'components/BuySell/styled.js'
 import { statusHelper, bodyStatusHelper } from 'services/SfoxService'
 import { spacing } from 'services/StyleService'
 import FundingSource from 'components/BuySell/FundingSource'
+import { prop } from 'ramda'
 
 const ButtonRow = styled.div`
   display: flex;
@@ -97,6 +98,14 @@ class SfoxTradeDetails extends React.PureComponent {
               }
               <Text size='13px' weight={300} color='success'>{renderTotal(trade)}</Text>
             </OrderDetailsRow>
+            {
+              prop('expectedDelivery', trade)
+                ? <OrderDetailsRow>
+                  <Text size='13px' weight={300}><FormattedMessage id='orderdetails.fundsdelivery' defaultMessage='Estimated Delivery of Funds' /></Text>
+                  <Text size='13px' weight={300}>{new Date(trade.expectedDelivery).toDateString()}</Text>
+                </OrderDetailsRow>
+                : null
+            }
           </OrderDetailsTable>
           <ButtonRow>
             <Button width='100px' onClick={this.props.close} nature='primary'>

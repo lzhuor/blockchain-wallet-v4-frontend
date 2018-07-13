@@ -223,6 +223,7 @@ export default ({ coreSagas }) => {
       yield put(A.sfoxLoading())
       const jumioStatus = yield call(coreSagas.data.sfox.getEnhancedVerificationStatus)
       console.log('sfox frontend getJumio', jumioStatus)
+      yield put(A.sfoxSuccess())
     } catch (e) {
       yield put(actions.logs.logErrorMessage(logLocation, 'getJumio', e))
     }
@@ -233,6 +234,7 @@ export default ({ coreSagas }) => {
       yield put(A.sfoxLoading())
       const jumioInitialized = yield call(coreSagas.data.sfox.startEnhancedVerification)
       console.log('sfox frontend initializeJumio', jumioInitialized)
+      yield put(A.sfoxSuccess())
     } catch (e) {
       yield put(actions.logs.logErrorMessage(logLocation, 'getJumio', e))
     }
