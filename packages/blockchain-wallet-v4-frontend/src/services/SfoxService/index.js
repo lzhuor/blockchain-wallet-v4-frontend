@@ -44,17 +44,17 @@ export const statusHelper = status => {
   }
 }
 
-export const bodyStatusHelper = (status, isBuy) => {
+export const bodyStatusHelper = (status, isBuy, date) => {
   if (isBuy) {
     switch (status) {
-      case 'processing': return { text: <FormattedMessage id='scenes.services.sfoxservice.buysellorderhistory.list.orderstatusbody.buy.processing' defaultMessage='Your buy trade has been initiated. You will receive your bitcoin in 3-5 business days.' /> }
+      case 'processing': return { text: <FormattedMessage id='scenes.services.sfoxservice.buysellorderhistory.list.orderstatusbody.buy.processing' defaultMessage='Your buy trade has been initiated. You will receive your bitcoin on {date}.' values={{ date: new Date(date).toDateString() }} /> }
       case 'completed': return { text: <FormattedMessage id='scenes.services.sfoxservice.buysellorderhistory.list.orderstatusbody.buy.completed' defaultMessage='Your buy trade is complete!' /> }
       case 'rejected': return { text: <FormattedMessage id='scenes.services.sfoxservice.buysellorderhistory.list.orderstatusbody.buy.rejected' defaultMessage='Your buy trade has been rejected. Please contact support.' /> }
       case 'failed': return { text: <FormattedMessage id='scenes.services.sfoxservice.buysellorderhistory.list.orderstatusbody.buy.failed' defaultMessage='Your buy trade failed. Please contact support.' /> }
     }
   } else {
     switch (status) {
-      case 'processing': return { text: <FormattedMessage id='scenes.services.sfoxservice.buysellorderhistory.list.orderstatusbody.sell.processing' defaultMessage='Your sell trade has been initiated. You will receive your funds in 3-5 business days.' /> }
+      case 'processing': return { text: <FormattedMessage id='scenes.services.sfoxservice.buysellorderhistory.list.orderstatusbody.sell.processing' defaultMessage='Your sell trade has been initiated. You will receive your funds on {date}.' values={{ date: new Date(date).toDateString() }} /> }
       case 'completed': return { text: <FormattedMessage id='scenes.services.sfoxservice.buysellorderhistory.list.orderstatusbody.sell.completed' defaultMessage='Your sell trade is complete!' /> }
       case 'rejected': return { text: <FormattedMessage id='scenes.services.sfoxservice.buysellorderhistory.list.orderstatusbody.sell.rejected' defaultMessage='Your sell trade has been rejected. Please contact support.' /> }
       case 'failed': return { text: <FormattedMessage id='scenes.services.sfoxservice.buysellorderhistory.list.orderstatusbody.sell.failed' defaultMessage='Your sell trade failed. Please contact support.' /> }

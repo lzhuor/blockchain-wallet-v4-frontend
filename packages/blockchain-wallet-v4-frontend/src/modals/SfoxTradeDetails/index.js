@@ -43,9 +43,11 @@ const renderTotal = trade => {
 
 class SfoxTradeDetails extends React.PureComponent {
   render () {
-    const headerStatus = statusHelper(this.props.trade.state)
-    const bodyStatus = bodyStatusHelper(this.props.trade.state, this.props.trade.isBuy)
     const { account, trade } = this.props
+    const { state, isBuy, expectedDelivery, id } = trade
+
+    const headerStatus = statusHelper(state)
+    const bodyStatus = bodyStatusHelper(state, isBuy, expectedDelivery)
 
     return (
       <Modal size='large' position={this.props.position} total={this.props.total}>
@@ -59,7 +61,7 @@ class SfoxTradeDetails extends React.PureComponent {
             { bodyStatus.text }
           </Text>
           <Text style={spacing('pt-5')} size='13px' weight={300}>
-            <FormattedMessage id='sfoxtradedetails.orderdetails.tradeid' defaultMessage='Your order ID is: SFX-{id}' values={{ id: trade.id }} />
+            <FormattedMessage id='sfoxtradedetails.orderdetails.tradeid' defaultMessage='Your order ID is: SFX-{id}' values={{ id: id }} />
           </Text>
           <Text style={spacing('mt-20')} size='14px' weight={400}>
             { trade.isBuy
@@ -102,7 +104,7 @@ class SfoxTradeDetails extends React.PureComponent {
               prop('expectedDelivery', trade)
                 ? <OrderDetailsRow>
                   <Text size='13px' weight={300}><FormattedMessage id='orderdetails.fundsdelivery' defaultMessage='Estimated Delivery of Funds' /></Text>
-                  <Text size='13px' weight={300}>{new Date(trade.expectedDelivery).toDateString()}</Text>
+                  <Text size='13px' weight={300}>{new Date(expectedDelivery).toDateString()}</Text>
                 </OrderDetailsRow>
                 : null
             }
