@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { FormattedMessage } from 'react-intl'
-import { Button, HeartbeatLoader, Link, Text } from 'blockchain-info-components'
-import { Remote } from 'blockchain-wallet-v4/src'
-import { prop } from 'ramda'
+// import { FormattedMessage } from 'react-intl'
+// import { Button, HeartbeatLoader, Link, Text } from 'blockchain-info-components'
+// import { Remote } from 'blockchain-wallet-v4/src'
+// import { prop } from 'ramda'
 
 const Container = styled.div`
   display: flex;

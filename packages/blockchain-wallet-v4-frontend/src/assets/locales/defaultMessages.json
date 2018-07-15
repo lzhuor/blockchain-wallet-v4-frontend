@@ -1281,6 +1281,15 @@
   {
     "descriptors": [
       {
+        "defaultMessage": "Refresh balance data",
+        "id": "wallet.menutop.balance.refreshall"
+      }
+    ],
+    "path": "src/layouts/Wallet/MenuTop/Balance/template.failure.json"
+  },
+  {
+    "descriptors": [
+      {
         "defaultMessage": "Bitcoin Balance",
         "id": "scenes.wallet.menutop.balance.bitcoinbalance"
       },
@@ -1956,55 +1965,6 @@
   {
     "descriptors": [
       {
-        "defaultMessage": "Learn More",
-        "id": "layouts.wallet.header.whatsnew.whatsnew.learnmore"
-      },
-      {
-        "defaultMessage": "New Bitcoin Cash Address Format",
-        "id": "layouts.wallet.header.whatsnew.whatsnew.title11"
-      },
-      {
-        "defaultMessage": "Bitcoin Cash addresses now follow the CashAddr format.",
-        "id": "layouts.wallet.header.whatsnew.whatsnew.desc11"
-      },
-      {
-        "defaultMessage": "Bitcoin Cash",
-        "id": "layouts.wallet.header.whatsnew.whatsnew.title10"
-      },
-      {
-        "defaultMessage": "If you had bitcoin in your wallet before August 1, 2017, you can now access Bitcoin Cash in your Blockchain wallet.",
-        "id": "layouts.wallet.header.whatsnew.whatsnew.desc10"
-      },
-      {
-        "defaultMessage": "Exchange Assets",
-        "id": "layouts.wallet.header.whatsnew.whatsnew.title9"
-      },
-      {
-        "defaultMessage": "You can exchange between bitcoin, ether, and bitcoin cash directly from your Blockchain wallet",
-        "id": "layouts.wallet.header.whatsnew.whatsnew.desc9"
-      },
-      {
-        "defaultMessage": "Send & Receive Ether",
-        "id": "layouts.wallet.header.whatsnew.whatsnew.title8"
-      },
-      {
-        "defaultMessage": "You can now send and receive ether from your Blockchain wallet!",
-        "id": "layouts.wallet.header.whatsnew.whatsnew.desc8"
-      },
-      {
-        "defaultMessage": "Sell Bitcoin",
-        "id": "layouts.wallet.header.whatsnew.whatsnew.title7"
-      },
-      {
-        "defaultMessage": "You can now sell bitcoin directly from your Blockchain wallet!",
-        "id": "layouts.wallet.header.whatsnew.whatsnew.desc7"
-      }
-    ],
-    "path": "src/layouts/Wallet/TrayRight/WhatsNew/WhatsNewContent/index.json"
-  },
-  {
-    "descriptors": [
-      {
         "defaultMessage": "Add New Bitcoin Wallet",
         "id": "modals.addbitcoinwallet.title"
       },
@@ -2646,6 +2606,27 @@
       }
     ],
     "path": "src/modals/ImportBtcAddress/template.json"
+  },
+  {
+    "descriptors": [
+      {
+        "defaultMessage": "Speed Up Your Bitcoin Purchase",
+        "id": "modals.jumioprompt.header"
+      },
+      {
+        "defaultMessage": "By verifying your identity, your limit will be higher and you will get your bitcoin faster!",
+        "id": "modals.jumioprompt.body1"
+      },
+      {
+        "defaultMessage": "No Thanks",
+        "id": "modals.jumioprompt.close"
+      },
+      {
+        "defaultMessage": "Let's do it!",
+        "id": "modals.jumioprompt.dothat"
+      }
+    ],
+    "path": "src/modals/JumioPrompt/index.json"
   },
   {
     "descriptors": [
@@ -3759,6 +3740,15 @@
   {
     "descriptors": [
       {
+        "defaultMessage": "Start Verification",
+        "id": "sfoxexchangedata.verify.jumio.startverification"
+      }
+    ],
+    "path": "src/modals/SfoxExchangeData/Jumio/template.success.json"
+  },
+  {
+    "descriptors": [
+      {
         "defaultMessage": "Full Name of Primary Account Holder",
         "id": "sfoxexchangedata.link.addmanually.accountholdername"
       },
@@ -4164,6 +4154,10 @@
       {
         "defaultMessage": "Total to be Received",
         "id": "orderdetails.totaltobereceived"
+      },
+      {
+        "defaultMessage": "Estimated Delivery of Funds",
+        "id": "orderdetails.fundsdelivery"
       },
       {
         "defaultMessage": "Close",
@@ -6804,6 +6798,48 @@
     "descriptors": [
       {
         "defaultMessage": "Change",
+        "id": "scenes.securitysettings.basicsecurity.passwordhint.settings.change"
+      },
+      {
+        "defaultMessage": "Cancel",
+        "id": "scenes.securitysettings.basicsecurity.passwordhint.settings.cancel"
+      },
+      {
+        "defaultMessage": "Change",
+        "id": "scenes.securitysettings.basicsecurity.passwordhint.settings.save"
+      }
+    ],
+    "path": "src/scenes/SecurityCenter/Advanced/PasswordHint/Settings/template.json"
+  },
+  {
+    "descriptors": [
+      {
+        "defaultMessage": "Password Hint",
+        "id": "scenes.settings.passwordhint.title"
+      },
+      {
+        "defaultMessage": "Hint Stored",
+        "id": "scenes.security.passwordhint.stored"
+      },
+      {
+        "defaultMessage": "Not Stored",
+        "id": "scenes.security.passwordhint.notstored"
+      },
+      {
+        "defaultMessage": "Blockchain cannot reset your password.",
+        "id": "scenes.settings.passwordhint.description1"
+      },
+      {
+        "defaultMessage": "Create a memorable password hint that we can send to your verified email address in case you forget your password.",
+        "id": "scenes.settings.passwordhint.description2"
+      }
+    ],
+    "path": "src/scenes/SecurityCenter/Advanced/PasswordHint/template.json"
+  },
+  {
+    "descriptors": [
+      {
+        "defaultMessage": "Change",
         "id": "scenes.securitysettings.advancedsettings.passwordstretching.settings.change"
       },
       {
@@ -8799,7 +8835,7 @@
         "id": "scenes.services.sfoxservice.buysellorderhistory.list.orderstatus.unknown"
       },
       {
-        "defaultMessage": "Your buy trade has been initiated. You will receive your bitcoin in 3-5 business days.",
+        "defaultMessage": "Your buy trade has been initiated. You will receive your bitcoin on {date}.",
         "id": "scenes.services.sfoxservice.buysellorderhistory.list.orderstatusbody.buy.processing"
       },
       {
@@ -8815,7 +8851,7 @@
         "id": "scenes.services.sfoxservice.buysellorderhistory.list.orderstatusbody.buy.failed"
       },
       {
-        "defaultMessage": "Your sell trade has been initiated. You will receive your funds in 3-5 business days.",
+        "defaultMessage": "Your sell trade has been initiated. You will receive your funds on {date}.",
         "id": "scenes.services.sfoxservice.buysellorderhistory.list.orderstatusbody.sell.processing"
       },
       {
