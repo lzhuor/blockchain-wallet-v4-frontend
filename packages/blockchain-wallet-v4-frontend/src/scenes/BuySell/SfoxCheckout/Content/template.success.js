@@ -21,14 +21,14 @@ const CheckoutWrapper = styled.div`
   width: 50%;
   ${media.mobile`
     width: 100%;
-  `}
+  `};
 `
 const OrderSubmitWrapper = CheckoutWrapper.extend`
   width: 35%;
   padding: 30px 30px 30px 10%;
   ${media.mobile`
     padding: 0px;
-  `}
+  `};
 `
 const OrderHistoryWrapper = styled.div`
   width: 100%;
@@ -49,27 +49,60 @@ const SfoxBuySellContainer = styled.div`
   flex-direction: row;
   ${media.mobile`
     flex-direction: column;
-  `}
+  `};
 `
 const faqList = [
   {
-    question: <FormattedMessage id='scenes.buysell.sfoxcheckout.cyo.helper1.question' defaultMessage='What are the fees?' />,
-    answer: <FormattedMessage id='scenes.buysell.sfoxcheckout.cyo.helper1.answer' defaultMessage='There is a trading fee that SFOX requires to execute a buy or sell trade. For sell trades specifically, there is an additional transaction fee that goes to network miners in order to send the amount you’re selling to SFOX.' />
+    question: (
+      <FormattedMessage
+        id='scenes.buysell.sfoxcheckout.cyo.helper1.question'
+        defaultMessage='What are the fees?'
+      />
+    ),
+    answer: (
+      <FormattedMessage
+        id='scenes.buysell.sfoxcheckout.cyo.helper1.answer'
+        defaultMessage='There is a trading fee that SFOX requires to execute a buy or sell trade. For sell trades specifically, there is an additional transaction fee that goes to network miners in order to send the amount you’re selling to SFOX.'
+      />
+    )
   },
   {
-    question: <FormattedMessage id='scenes.buysell.sfoxcheckout.cyo.helper2.question' defaultMessage='What is the exchange rate?' />,
-    answer: <FormattedMessage id='scenes.buysell.sfoxcheckout.cyo.helper2.answer' defaultMessage='These rates are determined by the market; the broader ecosystem of other buyers and sellers. We fetch the most recent exchange rate and guarantee it for 30 seconds. The quote will automatically refresh every 30 seconds until you select ‘Submit’.' />
+    question: (
+      <FormattedMessage
+        id='scenes.buysell.sfoxcheckout.cyo.helper2.question'
+        defaultMessage='What is the exchange rate?'
+      />
+    ),
+    answer: (
+      <FormattedMessage
+        id='scenes.buysell.sfoxcheckout.cyo.helper2.answer'
+        defaultMessage='These rates are determined by the market; the broader ecosystem of other buyers and sellers. We fetch the most recent exchange rate and guarantee it for 30 seconds. The quote will automatically refresh every 30 seconds until you select ‘Submit’.'
+      />
+    )
   },
   {
-    question: <FormattedMessage id='scenes.buysell.sfoxcheckout.cyo.helper3.question' defaultMessage='How do I raise my limits?' />,
-    answer: <FormattedMessage id='scenes.buysell.sfoxcheckout.cyo.helper3.answer' defaultMessage='Daily limits are determined by how much information has been submitted to, and verified by, SFOX— the highest daily limit being $10,000. Keep in mind: Your daily buy and sell limits directly impact each other (for example, If your limit is $10,000 and you decide to sell $5,000, you will have a limit to buy $5,000).' />
+    question: (
+      <FormattedMessage
+        id='scenes.buysell.sfoxcheckout.cyo.helper3.question'
+        defaultMessage='How do I raise my limits?'
+      />
+    ),
+    answer: (
+      <FormattedMessage
+        id='scenes.buysell.sfoxcheckout.cyo.helper3.answer'
+        defaultMessage='Daily limits are determined by how much information has been submitted to, and verified by, SFOX— the highest daily limit being $10,000. Keep in mind: Your daily buy and sell limits directly impact each other (for example, If your limit is $10,000 and you decide to sell $5,000, you will have a limit to buy $5,000).'
+      />
+    )
   }
 ]
 
-const faqListHelper = () => faqList.map((el, i) => <Helper key={i} question={el.question} answer={el.answer} />)
+const faqListHelper = () =>
+  faqList.map((el, i) => (
+    <Helper key={i} question={el.question} answer={el.answer} />
+  ))
 
-const isPending = (t) => equals(prop('state', t), 'processing')
-const isCompleted = (t) => !isPending(t)
+const isPending = t => equals(prop('state', t), 'processing')
+const isCompleted = t => !isPending(t)
 
 const Success = props => {
   const {
@@ -93,11 +126,17 @@ const Success = props => {
     enableButton,
     buttonStatus,
     jumioStatus,
-    ...rest } = props
+    ...rest
+  } = props
 
   const accounts = Remote.of(props.value.accounts).getOrElse([])
-  const profile = Remote.of(props.value.profile).getOrElse({ account: { verification_status: {} }, limits: { buy: 0, sell: 0 } })
-  const verificationStatus = Remote.of(props.value.verificationStatus).getOrElse({ level: 'unverified', required_docs: [] })
+  const profile = Remote.of(props.value.profile).getOrElse({
+    account: { verification_status: {} },
+    limits: { buy: 0, sell: 0 }
+  })
+  const verificationStatus = Remote.of(
+    props.value.verificationStatus
+  ).getOrElse({ level: 'unverified', required_docs: [] })
   const payment = props.payment.getOrElse({ effectiveBalance: 0 })
 
   const { trades, type, busy } = rest
@@ -137,11 +176,9 @@ const Success = props => {
               />
             </CheckoutWrapper>
             <OrderSubmitWrapper>
-              {
-                Remote.Success.is(jumioStatus)
-                  ? <JumioStatus {...jumioStatus.getOrElse()} />
-                  : null
-              }
+              {Remote.Success.is(jumioStatus) ? (
+                <JumioStatus {...jumioStatus.getOrElse()} />
+              ) : null}
               {faqListHelper()}
             </OrderSubmitWrapper>
           </SfoxBuySellContainer>
@@ -225,21 +262,34 @@ const Success = props => {
         <OrderHistoryWrapper>
           <OrderHistoryContent>
             <Text size='15px' weight={400}>
-              <FormattedMessage id='scenes.buysell.sfoxcheckout.trades.pending' defaultMessage='Pending Orders' />
+              <FormattedMessage
+                id='scenes.buysell.sfoxcheckout.trades.pending'
+                defaultMessage='Pending Orders'
+              />
             </Text>
             <OrderHistoryTable
               trades={filter(isPending, trades)}
               conversion={conversion}
-              handleDetailsClick={trade => showModal('SfoxTradeDetails', { trade })}
+              handleDetailsClick={trade =>
+                showModal('SfoxTradeDetails', { trade })
+              }
               partner='sfox'
             />
           </OrderHistoryContent>
           <OrderHistoryContent>
             <Text size='15px' weight={400}>
-              <FormattedMessage id='scenes.buysell.sfoxcheckout.trades.completed' defaultMessage='Completed Orders' />
+              <FormattedMessage
+                id='scenes.buysell.sfoxcheckout.trades.completed'
+                defaultMessage='Completed Orders'
+              />
             </Text>
-            <OrderHistoryTable trades={filter(isCompleted, trades)} conversion={conversion}
-              handleDetailsClick={trade => showModal('SfoxTradeDetails', { trade })} />
+            <OrderHistoryTable
+              trades={filter(isCompleted, trades)}
+              conversion={conversion}
+              handleDetailsClick={trade =>
+                showModal('SfoxTradeDetails', { trade })
+              }
+            />
           </OrderHistoryContent>
           {siftScienceEnabled ? <SiftScience /> : null}
         </OrderHistoryWrapper>

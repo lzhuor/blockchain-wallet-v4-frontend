@@ -18,11 +18,9 @@ const JumioIFrame = styled.iframe`
   border-style: solid;
   border-color: ${props => props.theme['gray-1']};
 `
-const ButtonContainer = styled.div`
+const ButtonContainer = styled.div``
 
-`
-
-const Jumio = (value) => {
+const Jumio = value => {
   const { options, token, id, initJumio, getJumio } = value
   const walletHelperRoot = path(['domains', 'walletHelper'], options)
   const jumioUrl = `${walletHelperRoot}/wallet-helper/jumio/#/key/${token}`
@@ -38,14 +36,15 @@ const Jumio = (value) => {
       <ButtonContainer>
         <Button nature='primary' onClick={initJumio}>
           <Text weight={300} size='14px' color='white'>
-            <FormattedMessage id='sfoxexchangedata.verify.jumio.startverification' defaultMessage='Start Verification' />
+            <FormattedMessage
+              id='sfoxexchangedata.verify.jumio.startverification'
+              defaultMessage='Start Verification'
+            />
           </Text>
         </Button>
-        <Button onClick={getJumio}>
-          get jumio status
-        </Button>
+        <Button onClick={getJumio}>get jumio status</Button>
       </ButtonContainer>
-    </Container >
+    </Container>
   )
 }
 

@@ -9,15 +9,11 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px 10px;
-  border: ${props => `1px solid ${props.theme['gray-1']}`}
+  border: ${props => `1px solid ${props.theme['gray-1']}`};
 `
 
 const JumioStatus = ({ status }) => {
-  return (
-    <Container>
-      jumio status: {status}
-    </Container>
-  )
+  return <Container>jumio status: {status}</Container>
 }
 
 export default JumioStatus
