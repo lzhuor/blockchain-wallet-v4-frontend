@@ -46,7 +46,7 @@ const FirstStep = props => {
       </DetailRow>
       <FormGroup inline margin={'15px'}>
         <FormItem width={'100%'}>
-          <FormLabel for='message'>
+          <FormLabel htmlFor='message'>
             <FormattedMessage
               id='modals.signmessage.firststep.message'
               defaultMessage='Message:'
@@ -69,10 +69,7 @@ const FirstStep = props => {
             onClick={closeAll}
             data-e2e='signMessageCloseButton'
           >
-            <FormattedMessage
-              id='modals.signmessage.close'
-              defaultMessage='Close'
-            />
+            <FormattedMessage id='buttons.close' defaultMessage='Close' />
           </ClickableText>
           <Button
             type='submit'

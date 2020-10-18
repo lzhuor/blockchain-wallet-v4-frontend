@@ -2,6 +2,9 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
 
+import { Icon } from '../Icons'
+import { selectBorderColor, selectFocusBorderColor } from './helper'
+
 const BaseTextInput = styled.input.attrs({
   type: 'text',
   'data-lpignore': props => props.noLastPass,
@@ -13,43 +16,51 @@ const BaseTextInput = styled.input.attrs({
   width: 100%;
   height: ${props => props.height};
   min-height: ${props => props.height};
-  padding: 6px 12px;
+  padding: ${props => (props.icon ? '6px 12px 6px 38px' : '6px 12px')};
   box-sizing: border-box;
   font-size: 16px;
   font-weight: 500;
-  color: ${props => props.theme['gray-6']};
-  background-color: ${props => props.theme.white};
+  color: ${props => props.theme['grey800']};
+  background-color: ${({ theme }) => theme.white};
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   background-image: none;
   outline-width: 0;
   user-select: text;
-  border: 1px solid ${props => props.theme[props.borderColor]};
+  border: ${({ borderColor, theme }) => `1px solid ${theme[borderColor]}`};
   border-right: ${props => (props.borderRightNone ? 'none' : '')};
-  border-radius: 4px;
+  border-radius: 8px;
 
+  &:focus {
+    border: 1px solid
+      ${({ focusedBorderColor, theme }) => theme[focusedBorderColor]};
+  }
+  &:focus::placeholder {
+    opacity: 0.25;
+  }
   &::placeholder {
-    color: ${props => props.theme['gray-3']};
-    opacity: 0.4;
+    color: ${props => props.theme.grey400};
+    font-size: 14px;
+    font-weight: 500;
   }
   &:disabled {
     cursor: not-allowed;
-    background-color: ${props => props.theme['gray-1']};
+    background-color: ${props => props.theme.grey100};
+    border: '1px solid transparent';
   }
 `
-
-const selectBorderColor = state => {
-  switch (state) {
-    case 'initial':
-      return 'grey100'
-    case 'invalid':
-      return 'error'
-    case 'valid':
-      return 'success'
-    default:
-      return 'grey100'
-  }
-}
+const Container = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  position: relative;
+`
+const InputIcon = styled(Icon)`
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  color: ${props => props.theme['grey400']};
+`
 
 class TextInput extends React.Component {
   static propTypes = {
@@ -83,18 +94,23 @@ class TextInput extends React.Component {
   }
 
   render () {
-    const { errorState, disabled, ...rest } = this.props
-    const borderColor = selectBorderColor(errorState)
+    const { disabled, errorState, icon, iconSize, value, ...rest } = this.props
 
     return (
-      <BaseTextInput
-        ref={this.refInput}
-        borderColor={borderColor}
-        disabled={disabled}
-        data-e2e={this.props['data-e2e']}
-        onKeyDown={this.onKeyPressed}
-        {...rest}
-      />
+      <Container>
+        {icon && <InputIcon name={icon} size={iconSize} />}
+        <BaseTextInput
+          borderColor={selectBorderColor(errorState)}
+          disabled={disabled}
+          data-e2e={this.props['data-e2e']}
+          focusedBorderColor={selectFocusBorderColor(errorState)}
+          icon={icon}
+          onKeyDown={this.onKeyPressed}
+          ref={this.refInput}
+          value={value}
+          {...rest}
+        />
+      </Container>
     )
   }
 }

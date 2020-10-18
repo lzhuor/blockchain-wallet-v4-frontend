@@ -13,7 +13,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
 
-import { Types } from 'blockchain-wallet-v4'
+import { Types } from 'blockchain-wallet-v4/src'
 
 const SecondPasswordWrapper = styled(SettingWrapper)`
   width: ${props => (props.toggled ? '150%' : 'initial')};
@@ -94,10 +94,7 @@ const Settings = props => {
                 onClick={handleCancel}
                 data-e2e='removeSecondPasswordCancelButton'
               >
-                <FormattedMessage
-                  id='scenes.securitysettings.advanced.secondpasswordwallet.settings.cancel'
-                  defaultMessage='Cancel'
-                />
+                <FormattedMessage id='buttons.cancel' defaultMessage='Cancel' />
               </Button>
               <Button
                 type='submit'
@@ -155,7 +152,7 @@ const Settings = props => {
             </TextGroup>
             <FormGroup>
               <FormItem>
-                <FormLabel for='secondPassword'>
+                <FormLabel htmlFor='secondPassword'>
                   <FormattedMessage
                     id='scenes.securitysettings.advanced.secondpasswordwallet.settings.label2'
                     defaultMessage='Second Password'
@@ -169,7 +166,7 @@ const Settings = props => {
                 />
               </FormItem>
               <FormItem style={{ 'margin-top': '10px' }}>
-                <FormLabel for='secondPasswordConfirmation'>
+                <FormLabel htmlFor='secondPasswordConfirmation'>
                   <FormattedMessage
                     id='scenes.securitysettings.advanced.secondpasswordwallet.settings.explain'
                     defaultMessage='Confirm Second Password'
@@ -190,10 +187,7 @@ const Settings = props => {
                 onClick={handleCancel}
                 data-e2e='secondPasswordCancelButton'
               >
-                <FormattedMessage
-                  id='scenes.securitysettings.advanced.secondpasswordwallet.settings.cancel2'
-                  defaultMessage='Cancel'
-                />
+                <FormattedMessage id='buttons.cancel' defaultMessage='Cancel' />
               </Button>
               <Button
                 nature='primary'

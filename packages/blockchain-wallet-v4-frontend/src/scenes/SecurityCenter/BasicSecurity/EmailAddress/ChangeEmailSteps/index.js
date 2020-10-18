@@ -43,21 +43,23 @@ function ChangeEmailSteps (props) {
               nature='primary'
               onClick={props.handleEmailChangeSubmit}
               disabled={props.invalid}
+              data-e2e='changeEmailButton'
             >
               <FormattedMessage
                 id='scenes.preferences.email.settings.updateform.change'
                 defaultMessage='Change'
               />
             </Button>
-            <Button nature='empty' onClick={props.handleEmailChangeCancel}>
-              <FormattedMessage
-                id='scenes.preferences.email.settings.updateform.cancel'
-                defaultMessage='Cancel'
-              />
+            <Button
+              nature='empty'
+              onClick={props.handleEmailChangeCancel}
+              data-e2e='cancelEmailChange'
+            >
+              <FormattedMessage id='buttons.cancel' defaultMessage='Cancel' />
             </Button>
           </ButtonContainer>
         </ChangeEmailInputWrapper>
-        <Text size='12px' color='gray-4' weight={400}>
+        <Text size='12px' color='grey500' weight={400}>
           <FormattedHTMLMessage
             id='scenes.security.email.changeemail.description'
             defaultMessage='<b>Note:</b> This will change your wallet’s email address. The email address you use to buy or sell with will remain the same.'

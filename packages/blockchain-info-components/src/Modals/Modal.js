@@ -20,13 +20,19 @@ const ModalBackground = styled.div`
   @media (min-width: 768px) {
     align-items: center;
   }
+
+  @media (max-width: 767px) {
+    min-height: 100vh;
+    /* stylelint-disable-next-line */
+    min-height: -webkit-fill-available;
+    overflow: auto;
+  }
 `
 
 const BaseModal = styled.div`
   display: ${props => (props.isLast ? 'block' : 'none')};
   position: relative;
   width: 100%;
-  margin-top: 60px;
   z-index: ${props => (props.type === 'tray' ? 1039 : 1040)};
   background-color: ${props => props.theme.white};
   box-shadow: none;
@@ -106,7 +112,7 @@ const Modal = props => {
 Modal.propTypes = {
   position: PropTypes.number,
   total: PropTypes.number,
-  size: PropTypes.oneOf(['small', 'medium', 'large', 'xlarge', ''])
+  size: PropTypes.oneOf(['xsmall', 'small', 'medium', 'large', 'xlarge', ''])
 }
 
 export default Modal

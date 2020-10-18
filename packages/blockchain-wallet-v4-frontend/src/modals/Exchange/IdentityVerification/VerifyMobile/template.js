@@ -142,7 +142,7 @@ const VerifyMobile = ({
               <FormContainer>
                 <FaqFormGroup>
                   <FormItem>
-                    <Label for='smsNumber'>
+                    <Label HtmlFor='smsNumber'>
                       <FormattedMessage
                         id='identityverification.personal.mobile.entermobilenumber'
                         defaultMessage='Enter your mobile number here'
@@ -195,7 +195,7 @@ const VerifyMobile = ({
                 {step === SMS_STEPS.verify && (
                   <FaqFormGroup>
                     <FormItem>
-                      <Label for='code'>
+                      <Label HtmlFor='code'>
                         <FormattedMessage
                           id='identityverification.personal.mobile.entercode.verification_code'
                           defaultMessage='Verification code'
@@ -238,10 +238,7 @@ const VerifyMobile = ({
       footer={
         <Footer>
           <BackButton onClick={onBack} disabled={submitting}>
-            <FormattedMessage
-              id='identityverification.personal.back'
-              defaultMessage='Back'
-            />
+            <FormattedMessage id='buttons.back' defaultMessage='Back' />
           </BackButton>
           <Button
             nature='primary'
@@ -250,7 +247,7 @@ const VerifyMobile = ({
           >
             {!submitting ? (
               <FormattedMessage
-                id='identityverification.mobile.personal.continue'
+                id='buttons.continue'
                 defaultMessage='Continue'
               />
             ) : (

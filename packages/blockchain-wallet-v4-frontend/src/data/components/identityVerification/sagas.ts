@@ -17,10 +17,11 @@ import {
 } from './model'
 import { call, delay, put, select, take } from 'redux-saga/effects'
 import { computeSteps } from './services'
-import { getStateNameFromAbbreviation } from 'services/LocalesService'
-import { isEmpty, mapObjIndexed, prop, sort, toUpper } from 'ramda'
+import { isEmpty, prop, toUpper } from 'ramda'
+import { KycStateType } from 'data/modules/types'
+import { RemoteDataType } from 'core/types'
 import { StateType, StepsType } from './types'
-import { Types } from 'blockchain-wallet-v4'
+import { Types } from 'blockchain-wallet-v4/src'
 import profileSagas from '../../modules/profile/sagas'
 
 export const logLocation = 'components/identityVerification/sagas'
@@ -31,7 +32,7 @@ export const emailExistsError = 'User with this email already exists'
 export const wrongFlowTypeError = 'Wrong flow type'
 export const noCampaignDataError = 'User did not come from campaign'
 
-export default ({ api, coreSagas }) => {
+export default ({ api, coreSagas, networks }) => {
   const { TIERS } = model.profile
   const {
     getCampaignData,
@@ -42,7 +43,8 @@ export default ({ api, coreSagas }) => {
     syncUserWithWallet
   } = profileSagas({
     api,
-    coreSagas
+    coreSagas,
+    networks
   })
 
   const registerUserCampaign = function * (payload) {
@@ -126,13 +128,17 @@ export default ({ api, coreSagas }) => {
   }
 
   const verifyIdentity = function * ({ payload }) {
-    const { tier, isCoinify, needMoreInfo } = payload
+    const { tier, needMoreInfo, origin } = payload
     yield put(
-      actions.modals.showModal(KYC_MODAL, { tier, isCoinify, needMoreInfo })
+      actions.modals.showModal(KYC_MODAL, {
+        tier,
+        needMoreInfo,
+        origin: origin || 'Unknown'
+      })
     )
   }
 
-  const defineSteps = function * (tier, isCoinify, needMoreInfo) {
+  const defineSteps = function * (tier, needMoreInfo) {
     yield put(A.setStepsLoading())
     try {
       yield call(createUser)
@@ -154,13 +160,12 @@ export default ({ api, coreSagas }) => {
       selectors.core.settings.getSmsVerified
     )).getOrElse(0)
     const currentStep = yield select(S.getVerificationStep)
-    const coinifyUser = (yield select(
-      selectors.core.kvStore.buySell.getCoinifyUser
-    )).getOrElse(false)
+    const kycState = (selectors.modules.profile.getUserKYCState(
+      yield select()
+    ) as RemoteDataType<string, KycStateType>).getOrElse('NONE')
     const steps = computeSteps({
-      coinifyUser,
       currentStep,
-      isCoinify,
+      kycState,
       mobileVerified,
       needMoreInfo,
       smsVerified,
@@ -171,9 +176,9 @@ export default ({ api, coreSagas }) => {
   }
 
   const initializeVerification = function * ({ payload }) {
-    const { tier = TIERS[2], isCoinify = false, needMoreInfo = false } = payload
+    const { tier = TIERS[2], needMoreInfo = false } = payload
     yield put(A.setEmailStep(EMAIL_STEPS.edit))
-    yield call(defineSteps, tier, isCoinify, needMoreInfo)
+    yield call(defineSteps, tier, needMoreInfo)
     yield call(initializeStep)
   }
 
@@ -183,8 +188,10 @@ export default ({ api, coreSagas }) => {
   }
 
   const goToPrevStep = function * () {
-    const steps = (yield select(S.getSteps)).getOrElse([])
-    const currentStep = yield select(S.getVerificationStep)
+    const stepsR = S.getSteps(yield select())
+    const steps = stepsR.getOrElse<Array<StepsType>, any[]>([])
+    const currentStep = S.getVerificationStep(yield select())
+    if (!currentStep) return
     const currentStepIndex = steps.indexOf(currentStep)
     const step = steps[currentStepIndex - 1]
 
@@ -346,36 +353,18 @@ export default ({ api, coreSagas }) => {
     }
   }
 
-  const fetchStates = function * ({ payload }) {
-    const { isCoinify } = payload
+  const fetchStates = function * () {
     try {
       let stateList: Array<StateType> = []
       yield put(A.setStatesLoading())
-      if (isCoinify) {
-        const coinifySupportList = yield call(api.getCoinifyStates)
-        // hack to create similar state list model as Nabu
-        mapObjIndexed((s, key) => {
-          stateList.push({
-            name: getStateNameFromAbbreviation(key),
-            // @ts-ignore
-            scopes: s.supported ? ['KYC'] : []
-          })
-        }, coinifySupportList.US.states)
-        yield put(
-          A.setStatesSuccess(
-            sort((a, b) => a.name.localeCompare(b.name), stateList)
-          )
-        )
-      } else {
-        stateList = yield call(api.getStates)
-        yield put(A.setStatesSuccess(stateList))
-      }
+      stateList = yield call(api.getStates)
+      yield put(A.setStatesSuccess(stateList))
     } catch (e) {
       yield put(A.setStatesFailure(e))
       actions.logs.logErrorMessage(
         logLocation,
         'fetchStates',
-        `Error fetching supported ${isCoinify ? 'states' : 'countries'}:  ${e}`
+        `Error fetching supported states: ${e}`
       )
     }
   }

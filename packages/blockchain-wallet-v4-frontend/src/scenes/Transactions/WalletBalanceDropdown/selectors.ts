@@ -1,0 +1,106 @@
+import * as balanceSelectors from 'components/Balances/wallet/selectors'
+import { Exchange, Remote } from 'blockchain-wallet-v4/src'
+import { ExtractSuccess, FiatType } from 'core/types'
+import { getData as getAlgoAddressData } from 'components/Form/SelectBoxAlgoAddresses/selectors'
+import { getData as getBchAddressData } from 'components/Form/SelectBoxBchAddresses/selectors'
+import { getData as getBtcAddressData } from 'components/Form/SelectBoxBtcAddresses/selectors'
+import {
+  getErc20Data as getErc20AddressData,
+  getEthData as getEthAddressData
+} from 'components/Form/SelectBoxEthAddresses/selectors'
+import { getData as getXlmAddressData } from 'components/Form/SelectBoxXlmAddresses/selectors'
+import { lift } from 'ramda'
+import { OwnProps } from '.'
+import { selectors } from 'data'
+
+export const getData = (state, ownProps: OwnProps) => {
+  const { coin } = ownProps
+  let addressDataR
+  let balanceDataR
+
+  switch (coin) {
+    case 'BTC':
+      addressDataR = getBtcAddressData(state, {
+        excludeLockbox: true,
+        excludeImported: true,
+        includeCustodial: true,
+        includeInterest: false,
+        includeAll: false
+      })
+      balanceDataR = balanceSelectors.getBtcBalance(state)
+      break
+    case 'BCH':
+      addressDataR = getBchAddressData(state, {
+        coin: 'BCH',
+        excludeLockbox: true,
+        includeCustodial: true
+      })
+      balanceDataR = balanceSelectors.getBchBalance(state)
+      break
+    case 'ETH':
+      addressDataR = getEthAddressData(state, {
+        excludeLockbox: true,
+        includeCustodial: true,
+        includeInterest: true
+      })
+      balanceDataR = balanceSelectors.getEthBalance(state)
+      break
+    case 'PAX':
+      addressDataR = getErc20AddressData(state, {
+        coin: 'PAX',
+        includeCustodial: true,
+        includeInterest: true
+      })
+      balanceDataR = balanceSelectors.getPaxBalance(state)
+      break
+    case 'USDT':
+      addressDataR = getErc20AddressData(state, {
+        coin: 'USDT',
+        includeCustodial: true,
+        includeInterest: true
+      })
+      balanceDataR = balanceSelectors.getUsdtBalance(state)
+      break
+    case 'XLM':
+      addressDataR = getXlmAddressData(state, {
+        excludeLockbox: true,
+        includeCustodial: true
+      })
+      balanceDataR = balanceSelectors.getXlmBalance(state)
+      break
+    case 'ALGO':
+      addressDataR = getAlgoAddressData(state, {
+        includeCustodial: true
+      })
+      balanceDataR = balanceSelectors.getAlgoBalance(state)
+      break
+    case 'EUR':
+    case 'GBP':
+    case 'USD':
+      addressDataR = Remote.Success({ data: [] })
+      balanceDataR = balanceSelectors.getFiatBalance(coin, state)
+      break
+    default:
+      addressDataR = Remote.Success({ data: [] })
+      balanceDataR = Remote.Success(0)
+  }
+  const currencyR = selectors.core.settings.getCurrency(state)
+  const sbBalancesR = selectors.components.simpleBuy.getSBBalances(state)
+
+  const transform = (
+    addressData,
+    balanceData,
+    currency: FiatType,
+    sbBalances: ExtractSuccess<typeof sbBalancesR>
+  ) => {
+    return {
+      currency,
+      addressData,
+      balanceData,
+      currencySymbol: Exchange.getSymbol(currency),
+      sbBalance: sbBalances[coin]
+    }
+  }
+
+  return lift(transform)(addressDataR, balanceDataR, currencyR, sbBalancesR)
+}

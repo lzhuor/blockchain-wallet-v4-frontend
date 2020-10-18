@@ -8,9 +8,9 @@ const Wrapper = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  height: calc(100% - 60px);
-  overflow-y: auto;
+  height: 100%;
   width: 100%;
+  overflow-y: auto;
   > div {
     box-sizing: border-box;
   }
@@ -22,7 +22,12 @@ class PageContainer extends React.Component {
       prevProps.children.props.computedMatch.url !==
       this.props.children.props.computedMatch.url
     ) {
-      ReactDOM.findDOMNode(this).scrollTop = 0
+      try {
+        ReactDOM.findDOMNode(this).scrollTop = 0
+      } catch (e) {
+        /* eslint-disable-next-line */
+        console.log(e)
+      }
     }
   }
 

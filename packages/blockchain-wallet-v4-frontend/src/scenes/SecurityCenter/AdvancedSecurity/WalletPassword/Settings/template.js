@@ -13,29 +13,13 @@ import {
   isNotCurrentPassword,
   required,
   validCurrentPassword,
-  validPasswordConfirmation
+  validPasswordConfirmation,
+  validStrongPassword
 } from 'services/FormHelper'
 import { SettingWrapper } from 'components/Setting'
 import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
-
-// load zxcvbn dependency async and set on window
-require.ensure(
-  ['zxcvbn'],
-  require => (window.zxcvbn = require('zxcvbn')),
-  'zxcvbn'
-)
-const validStrongPassword = password => {
-  return password !== undefined && window.zxcvbn(password).score > 1 ? (
-    undefined
-  ) : (
-    <FormattedMessage
-      id='scenes.securitysettings.advanced.walletpassword.weakpassword'
-      defaultMessage='Your password is too weak'
-    />
-  )
-}
 
 const ButtonWrapper = styled.div`
   display: flex;
@@ -82,7 +66,7 @@ const Settings = props => {
         <Form onSubmit={handleSubmit}>
           <FormGroup>
             <FormItemSpaced>
-              <FormLabel for='currentPassword'>
+              <FormLabel htmlFor='currentPassword'>
                 <FormattedMessage
                   id='scenes.securitysettings.advanced.walletpassword.settings.current'
                   defaultMessage='Current Password:'
@@ -97,7 +81,7 @@ const Settings = props => {
               />
             </FormItemSpaced>
             <FormItemSpaced style={{ marginTop: '12px' }}>
-              <FormLabel for='newPassword'>
+              <FormLabel htmlFor='newPassword'>
                 <FormattedMessage
                   id='scenes.securitysettings.advanced.walletpassword.settings.new'
                   defaultMessage='New Password:'
@@ -118,7 +102,7 @@ const Settings = props => {
               />
             </FormItemSpaced>
             <FormItemSpaced style={{ marginTop: '12px' }}>
-              <FormLabel for='walletPasswordConfirmation'>
+              <FormLabel htmlFor='walletPasswordConfirmation'>
                 <FormattedMessage
                   id='scenes.securitysettings.advanced.walletpassword.settings.confirm'
                   defaultMessage='Confirm Password:'
@@ -140,10 +124,7 @@ const Settings = props => {
               onClick={handleCancel}
               data-e2e='cancelPasswordChangeButton'
             >
-              <FormattedMessage
-                id='scenes.securitysettings.advanced.walletpassword.settings.cancel'
-                defaultMessage='Cancel'
-              />
+              <FormattedMessage id='buttons.cancel' defaultMessage='Cancel' />
             </Button>
             <Button
               type='submit'

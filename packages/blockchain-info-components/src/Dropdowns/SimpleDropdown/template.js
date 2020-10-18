@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import { Icon } from '../../Icons'
 import { keysIn } from 'ramda'
-import { Palette } from '../../Colors'
+import { Palette } from '../../Colors/index.ts'
 
 const Wrapper = styled.div`
   display: inline-flex;
@@ -18,7 +18,7 @@ const ButtonContainer = styled.div`
   align-items: center;
   cursor: pointer;
   width: inherit;
-  font-size: 14px;
+  font-size: ${props => props.size};
   font-weight: 600;
 
   & > * {
@@ -37,7 +37,7 @@ const DropdownIcon = styled(Icon)`
 const DropdownList = styled.ul`
   background-clip: padding-box;
   background-color: ${props => props.theme.white};
-  border: 1px solid ${props => props.theme['gray-1']};
+  border: 1px solid ${props => props.theme.grey000};
   border-radius: 4px;
   bottom: 0px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
@@ -63,7 +63,7 @@ const DropdownList = styled.ul`
 `
 
 const DropdownItem = styled.li`
-  color: ${props => props.theme['gray-6']};
+  color: ${props => props.theme['grey800']};
   cursor: pointer;
   padding: 3px 20px;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,

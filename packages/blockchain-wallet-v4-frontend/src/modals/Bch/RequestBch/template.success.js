@@ -78,7 +78,7 @@ const RequestBch = props => {
     <Form onSubmit={handleSubmit}>
       <FormGroup>
         <FormItem data-e2e='currencySelectDropdown'>
-          <FormLabel for='coin'>
+          <FormLabel htmlFor='coin'>
             <FormattedMessage
               id='modals.sendbch.coin'
               defaultMessage='Currency:'
@@ -94,7 +94,7 @@ const RequestBch = props => {
       </FormGroup>
       <FormGroup>
         <FormItem data-e2e='receiveToWalletDropdown'>
-          <FormLabel for='to'>
+          <FormLabel htmlFor='to'>
             <FormattedMessage
               id='modals.requestbch.firststep.receive'
               defaultMessage='Receive To:'
@@ -181,7 +181,7 @@ const RequestBch = props => {
         disabled={submitting || invalid}
         data-e2e='requestBchDoneButton'
       >
-        <FormattedMessage id='modals.requestbch.done' defaultMessage='Done' />
+        <FormattedMessage id='buttons.done' defaultMessage='Done' />
       </Button>
     </Form>
   )

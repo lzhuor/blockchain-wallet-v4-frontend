@@ -63,7 +63,7 @@ const RequestEth = props => {
     <Form onSubmit={handleSubmit}>
       <FormGroup>
         <FormItem data-e2e='currencySelectDropdown'>
-          <FormLabel for='coin'>
+          <FormLabel htmlFor='coin'>
             <FormattedMessage
               id='modals.requesteth.coin'
               defaultMessage='Currency:'
@@ -79,7 +79,7 @@ const RequestEth = props => {
       </FormGroup>
       <FormGroup>
         <FormItem data-e2e='receiveToWalletDropdown'>
-          <FormLabel for='to'>
+          <FormLabel htmlFor='to'>
             <FormattedMessage
               id='modals.requesteth.firststep.receive'
               defaultMessage='Receive To:'
@@ -158,7 +158,7 @@ const RequestEth = props => {
         data-e2e='requestEthDoneButton'
         fullwidth
       >
-        <FormattedMessage id='modals.requesteth.done' defaultMessage='Done' />
+        <FormattedMessage id='buttons.done' defaultMessage='Done' />
       </Button>
     </Form>
   )

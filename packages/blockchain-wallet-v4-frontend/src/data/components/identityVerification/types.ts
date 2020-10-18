@@ -1,10 +1,10 @@
 import * as AT from './actionTypes'
-import { RemoteData } from 'blockchain-wallet-v4/src/remote/types'
+import { ModalOriginType } from 'data/modals/types'
+import { RemoteDataType } from 'core/types'
 
 export type EmailSmsStepType = 'edit' | 'verify'
 
 export type StepsType =
-  | 'coinify'
   | 'personal'
   | 'moreInfo'
   | 'mobile'
@@ -51,13 +51,13 @@ export type CountryType = {
 export interface IdentityVerificationState {
   addressRefetchVisible: boolean
   emailStep: EmailSmsStepType
-  flowConfig: RemoteData<string, any>
-  preIdvData: RemoteData<string, PreIdvDataType>
-  smsStep: RemoteData<string, EmailSmsStepType>
-  states: RemoteData<string, StateType>
-  steps: RemoteData<string, any>
-  supportedCountries: RemoteData<string, Array<CountryType>>
-  supportedDocuments: RemoteData<string, Array<DocumentType>>
+  flowConfig: RemoteDataType<string, any>
+  preIdvData: RemoteDataType<string, PreIdvDataType>
+  smsStep: RemoteDataType<string, EmailSmsStepType>
+  states: RemoteDataType<string, StateType>
+  steps: RemoteDataType<string, Array<StepsType>>
+  supportedCountries: RemoteDataType<string, Array<CountryType>>
+  supportedDocuments: RemoteDataType<string, Array<DocumentType>>
   verificationStep: StepsType | null
 }
 
@@ -207,8 +207,8 @@ interface SetVerificationStepAction {
 
 interface VerifyIdentityAction {
   payload: {
-    isCoinify?: boolean
     needMoreInfo?: boolean
+    origin: ModalOriginType
     tier: number
   }
   type: typeof AT.VERIFY_IDENTITY

@@ -53,7 +53,7 @@ export const transformTx = curry((accounts, txNotes, tx, operation) => {
   const to = getDestination(operation)
   const from = prop('source_account', tx)
   const type = getType({ to, from }, addresses)
-  const fee = prop('fee_paid', tx)
+  const fee = prop('fee_charged', tx)
   const time = moment(prop('created_at', tx)).format('X')
   const hash = prop('hash', tx)
   const memo = prop('memo', tx)
@@ -65,19 +65,21 @@ export const transformTx = curry((accounts, txNotes, tx, operation) => {
       : operationAmount
 
   return {
-    blockHeight: -1,
-    description: pathOr('', [hash], txNotes),
     amount,
+    belongsToWallet: belongsToCurrentWallet(accounts, from, to),
+    blockHeight: -1,
+    coin: 'XLM',
+    description: pathOr('', [hash], txNotes),
     fee: Remote.Success(fee),
     from: getLabel(accounts, from),
     hash,
+    insertedAt: Number(time) * 1000,
     memo,
     memoType,
+    pagingToken,
     time,
     to: getLabel(accounts, to),
-    type,
-    pagingToken,
-    belongsToWallet: belongsToCurrentWallet(accounts, from, to)
+    type
   }
 })
 
@@ -85,6 +87,7 @@ export const decodeOperations = tx =>
   map(
     operation => operation.body().value(),
     StellarSdk.xdr.TransactionEnvelope.fromXDR(tx.envelope_xdr, 'base64')
+      .value()
       .tx()
       .operations()
   )

@@ -13,7 +13,7 @@ import styled from 'styled-components'
 
 const Wrapper = styled.div`
   font-weight: 400;
-  color: ${props => props.theme['gray-5']};
+  color: ${props => props.theme.grey700};
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 `
@@ -39,7 +39,7 @@ const EditTxDescription = props => {
           <ModalBody>
             <FormGroup>
               <FormItem data-e2e='editTransactionDescriptionInput'>
-                <Label for='description'>
+                <Label htmlFor='description'>
                   <FormattedMessage
                     id='modals.edittransactiondesc.description'
                     defaultMessage='Description'

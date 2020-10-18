@@ -57,14 +57,11 @@ const Success = props => {
   } = props
 
   return (
-    <React.Fragment>
+    <>
       <ConfirmWrapper>
         <LargeTableRow>
           <Text size='16px' weight={500}>
-            <FormattedMessage
-              id='modals.sendeth.secondstep.from'
-              defaultMessage='From:'
-            />
+            <FormattedMessage id='copy.from:' defaultMessage='From:' />
           </Text>
           <Text size='16px' weight={400} data-e2e={`${coin}FromWallet`}>
             {fromAddress}
@@ -143,16 +140,25 @@ const Success = props => {
           </Text>
           <ExchangeAmounts>
             {coin === 'ETH' ? (
-              <React.Fragment>
-                <SummaryExchangeAmount>{totalFiat}</SummaryExchangeAmount>
+              <>
+                <SummaryExchangeAmount data-e2e={`${coin}SendTotal`}>
+                  {totalFiat}
+                </SummaryExchangeAmount>
                 <SummarySubExchangeAmount>
-                  <CoinDisplay coin={coin} size='14px' weight={300}>
+                  <CoinDisplay
+                    coin={coin}
+                    size='14px'
+                    weight={300}
+                    data-e2e={`ETHSendTotal`}
+                  >
                     {totalCrypto}
                   </CoinDisplay>
                 </SummarySubExchangeAmount>
-              </React.Fragment>
+              </>
             ) : (
-              <SummaryExchangeAmount>-{totalFiat}</SummaryExchangeAmount>
+              <SummaryExchangeAmount data-e2e={`${coin}SendTotal`}>
+                -{totalFiat}
+              </SummaryExchangeAmount>
             )}
           </ExchangeAmounts>
         </LargeTableRow>
@@ -184,13 +190,10 @@ const Success = props => {
           weight={400}
           data-e2e={`${coin}SendBackLink`}
         >
-          <FormattedMessage
-            id='modals.sendeth.sendconfirm.back'
-            defaultMessage='Go Back'
-          />
+          <FormattedMessage id='buttons.go_back' defaultMessage='Go Back' />
         </Link>
       </Footer>
-    </React.Fragment>
+    </>
   )
 }
 

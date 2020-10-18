@@ -9,11 +9,11 @@ const Label = styled.label`
 `
 
 const FormLabel = props => {
-  const { children, ...rest } = props
+  const { children, htmlFor, ...rest } = props
 
   return (
-    <Label {...rest} htmlFor={props.for}>
-      <Text size={'14px'} color='gray-6' weight={600}>
+    <Label {...rest} htmlFor={htmlFor}>
+      <Text size={'14px'} color='grey800' weight={600}>
         {children}
       </Text>
     </Label>

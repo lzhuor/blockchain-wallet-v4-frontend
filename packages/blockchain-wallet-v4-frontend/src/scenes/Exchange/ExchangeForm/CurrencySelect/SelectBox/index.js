@@ -6,12 +6,12 @@ import styled from 'styled-components'
 
 const ExchangeSelect = styled(SelectBox)`
   .bc__control {
-    border: none;
+    border: none !important;
     :hover {
-      border: none;
+      border: none !important;
     }
     :active {
-      border: none;
+      border: none !important;
     }
   }
 
@@ -58,8 +58,8 @@ const Text = styled.span`
   position: relative;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-weight: 500;
-  font-size: 12px;
+  font-weight: 600;
+  font-size: 13px;
   text-transform: ${props => (props.uppercase ? 'uppercase' : 'none')};
   font-style: normal;
   cursor: pointer;
@@ -90,7 +90,11 @@ const renderDisplay = (props, children) => {
   const icon = pathOr('', ['value', 'icon'], props)
 
   return (
-    <DisplayWrapper className={props.className} coin={toLower(coin)}>
+    <DisplayWrapper
+      className={props.className}
+      coin={toLower(coin)}
+      data-e2e={`exchangeSourceWrapperCoin${coin}`}
+    >
       {<DisplayIcon name={icon} />}
       <Text>{children}</Text>
     </DisplayWrapper>
@@ -102,9 +106,15 @@ const renderItem = item => {
   const icon = pathOr('', ['value', 'icon'], item)
 
   const isSelected = prop('isSelected', item)
+
   return (
     <ItemWrapper>
-      <ItemIcon coin={toLower(coin)} isSelected={isSelected} name={icon} />
+      <ItemIcon
+        coin={toLower(coin)}
+        isSelected={isSelected}
+        name={icon}
+        data-e2e={`exchangeSourceItemCoin${coin}`}
+      />
       <Text>{item.text}</Text>
     </ItemWrapper>
   )

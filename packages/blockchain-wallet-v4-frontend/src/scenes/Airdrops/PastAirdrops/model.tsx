@@ -2,7 +2,7 @@ import {
   BlueCartridge,
   GreyCartridge,
   SuccessCartridge
-} from '../AirdropInfo/model'
+} from 'components/Cartridge'
 import { CampaignInfoType } from 'data/types'
 import { FormattedMessage } from 'react-intl'
 import { Icon, Text } from 'blockchain-info-components'
@@ -13,14 +13,6 @@ const TypeWrapper = styled.div`
   display: flex;
   align-items: center;
 `
-// TypeScript🔮
-// attributes: {}
-// campaignEndDate: null
-// campaignName: "BLOCKSTACK", "SUNRIVER", "POWER_PAX"
-// campaignState: "NONE", "STARTED", "ENDED"
-// updatedAt: "2019-11-28T11:08:41.927Z"
-// userCampaignState: "NONE", "REGISTERED", "TASK_FINISHED", "REWARD_SEND", "REWARD_RECEIVED", "FAILED"
-// userCampaignTransactionResponseList: []
 
 export const Type = ({ campaignName }: CampaignInfoType) => {
   switch (campaignName) {
@@ -43,7 +35,7 @@ export const Type = ({ campaignName }: CampaignInfoType) => {
         <TypeWrapper>
           <Icon name='pax' size='24px' style={{ marginRight: '8px' }} />
           <Text size='14px' weight={500}>
-            USD Pax
+            USD Digital
           </Text>
         </TypeWrapper>
       )
@@ -57,7 +49,7 @@ export const Type = ({ campaignName }: CampaignInfoType) => {
             style={{ marginRight: '8px' }}
           />
           <Text size='14px' weight={500}>
-            Blockstack
+            Blockstack (STX)
           </Text>
         </TypeWrapper>
       )
@@ -66,7 +58,11 @@ export const Type = ({ campaignName }: CampaignInfoType) => {
   }
 }
 
-export const Status = ({ campaignName, campaignState, userCampaignState }: CampaignInfoType) => {
+export const Status = ({
+  campaignName,
+  campaignState,
+  userCampaignState
+}: CampaignInfoType) => {
   // Special case for BLOCKSTACK campaign
   // See convo: https://blockc.slack.com/archives/GSAK5CKD5/p1578309118000200
   if (campaignName === 'BLOCKSTACK') {
@@ -120,16 +116,16 @@ export const To = ({ campaignName, userCampaignState }: CampaignInfoType) => {
           My Stellar Wallet
         </Text>
       ) : (
-          <Text>-</Text>
-        )
+        <Text>-</Text>
+      )
     case 'BLOCKSTACK':
       return userCampaignState === 'REWARD_RECEIVED' ? (
         <Text size='14px' weight={500}>
           My Blockstack Wallet
         </Text>
       ) : (
-          <Text>-</Text>
-        )
+        <Text>-</Text>
+      )
     default:
       return <Text>-</Text>
   }
